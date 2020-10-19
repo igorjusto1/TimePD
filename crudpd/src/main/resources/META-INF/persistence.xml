@@ -32,4 +32,33 @@
          <property name="hibernate.show_sql" value="false" />
       </properties>
    </persistence-unit>
+   
+   <persistence-unit name="rcb_PU" transaction-type="JTA">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>	
+		<jta-data-source>java:/rcbDS</jta-data-source>
+		
+		<!-- 
+		Configurações de configuração do banco de dados
+		Schema: PRCBE
+		User: prcbe
+		Password: prcbe001
+		
+		O driver será inserido via Maven -->
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.use_sql_comments" value="true"/> 
+			<property name="hibernate.archive.autodetection" value="class" />
+			<property name="hibernate.connection.autocommit" value="false" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />			
+			<property name="hibernate.proc.param_null_passing" value="true" />
+			<property name="hibernate.connection.url" value="svchrcbdbs00.sfb:1521:RCB00"/>
+			<property name="hibernate.default_schema" value="PRCBE"/>
+			<property name="hibernate.connection.username" value="prcbe"/>
+			<property name="hibernate.connection.password" value="prcbe001"/>
+			<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
+<!-- 			<property name="hibernate.cache.use_query_cache" value="true"/>	 -->
+		</properties>
+	</persistence-unit>
 </persistence>
