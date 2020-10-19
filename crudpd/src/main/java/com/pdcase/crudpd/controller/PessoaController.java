@@ -1,5 +1,7 @@
 package com.pdcase.crudpd.controller;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
@@ -7,9 +9,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.pdcase.crudpd.model.Member;
+import com.pdcase.crudpd.data.PessoaRepositorio;
 import com.pdcase.crudpd.model.Pessoa;
-import com.pdcase.crudpd.service.MemberRegistration;
+import com.pdcase.crudpd.service.PessoaRegistration;
 
 public class PessoaController {
 
@@ -17,15 +19,23 @@ public class PessoaController {
 	    private FacesContext facesContext;
 
 	    @Inject
-	    private MemberRegistration memberPessoa;
+	    private PessoaRegistration memberPessoa;
 
 	    @Produces
 	    @Named
 	    private Pessoa newPessoa;
 	    
+	    @Inject
+	    private PessoaRepositorio pr;
+	    
+	    @Produces
+	    @Named
+	    private List<Pessoa> listPessoas;
+	    
 	    @PostConstruct
 	    public void initNewPessoa() {
 	        newPessoa = new Pessoa();
+	        listPessoas = pr.getListPessoas();
 	    }
 
 	    public void register() throws Exception {

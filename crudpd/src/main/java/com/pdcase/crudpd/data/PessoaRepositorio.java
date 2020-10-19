@@ -29,8 +29,8 @@ public class PessoaRepositorio {
 		}
 
 	}
-
-	public void update(Pessoa p) {
+	
+	public void saveOrUpdate(Pessoa p) {
 		try {
 			em.getTransaction().begin();
 			em.persist(p);

@@ -3,17 +3,18 @@ package com.pdcase.crudpd.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+@Entity
 @Table(name = "pessoa_teste")
 public class Pessoa {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
-	private Long id;
+	private int id;
 
 	@Column(name = "nome")
 	private String nome;
@@ -28,11 +29,11 @@ public class Pessoa {
 	private Date nascimento;
 	
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

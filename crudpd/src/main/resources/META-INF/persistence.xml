@@ -20,22 +20,10 @@
    xsi:schemaLocation="
         http://xmlns.jcp.org/xml/ns/persistence
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-   <persistence-unit name="primary">
-      <!-- If you are running in a production environment, add a managed 
-         data source, this example data source is just for development and testing! -->
-      <!-- The datasource is deployed as WEB-INF/crudpd-ds.xml, you
-         can find it in the source at src/main/webapp/WEB-INF/crudpd-ds.xml -->
-      <jta-data-source>java:jboss/datasources/crudpdDS</jta-data-source>
-      <properties>
-         <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
-         <property name="hibernate.show_sql" value="false" />
-      </properties>
-   </persistence-unit>
-   
+
    <persistence-unit name="rcb_PU" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>	
-		<jta-data-source>java:/rcbDS</jta-data-source>
+		<jta-data-source>java:/rcbCRUDPD</jta-data-source>
 		
 		<!-- 
 		Configurações de configuração do banco de dados
@@ -53,12 +41,10 @@
 			<property name="hibernate.connection.autocommit" value="false" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />			
 			<property name="hibernate.proc.param_null_passing" value="true" />
-			<property name="hibernate.connection.url" value="svchrcbdbs00.sfb:1521:RCB00"/>
+			<property name="hibernate.connection.url" value="192.200.7.35:1521"/>
 			<property name="hibernate.default_schema" value="PRCBE"/>
 			<property name="hibernate.connection.username" value="prcbe"/>
 			<property name="hibernate.connection.password" value="prcbe001"/>
-			<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
-<!-- 			<property name="hibernate.cache.use_query_cache" value="true"/>	 -->
 		</properties>
 	</persistence-unit>
 </persistence>

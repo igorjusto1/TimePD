@@ -19,37 +19,31 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/default.xhtml">
+    template="/WEB-INF/templates/default.xhtml"
+                xmlns:rich="http://richfaces.org/rich">
     <ui:define name="content">
-        <h1>Welcome to WildFly!</h1>
+        <h1>Tela de Pessoas!</h1>
 
         <div>
-            <p>You have successfully deployed a Java EE 7 Enterprise
-                Application.</p>
-            <h3>Your application can run on:</h3>
-            <img src="resources/gfx/wildfly_400x130.jpg" />
+            <p>Listagem de Pessoas</p>
         </div>
-        
-        
-		<h:dataTable var="listPessoasDataTable" value="#{listPessoas}" styleClass="simpletablestyle">
+
+		<h:dataTable var="listPessoas" value="#{listPessoas}">
 			<h:column>
-				<h:outputText value="#{listPessoasDataTable.cpf}"/>
+				<h:outputText value="#{listPessoas.id}"/>
 			</h:column>
 			<h:column>
-				<h:outputText value="#{listPessoasDataTable.id}"/>
+				<h:outputText value="#{listPessoas.cpf}"/>
 			</h:column>
 			<h:column>
-				<h:outputText value="#{listPessoasDataTable.nascimento}"/>
+				<h:outputText value="#{listPessoas.nome}"/>
 			</h:column>
 			<h:column>
-				<h:outputText value="#{listPessoasDataTable.nome}"/>
+				<h:outputText value="#{listPessoas.sobrenome}"/>
 			</h:column>
 			<h:column>
-				<h:outputText value="#{listPessoasDataTable.sobrenome}"/>
+				<h:outputText value="#{listPessoas.nascimento}"/>
 			</h:column>
 		</h:dataTable>
-        
- 
-       
     </ui:define>
 </ui:composition>
