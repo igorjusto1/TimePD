@@ -23,7 +23,7 @@
 
    <persistence-unit name="rcb_PU" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>	
-		<jta-data-source>java:/rcbCRUDPD</jta-data-source>
+		<jta-data-source>java:/rcbDS2</jta-data-source>
 		
 		<!-- 
 		Configurações de configuração do banco de dados
