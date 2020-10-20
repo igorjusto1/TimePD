@@ -16,34 +16,67 @@
     limitations under the License.
 -->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/default.xhtml"
-                xmlns:rich="http://richfaces.org/rich">
-    <ui:define name="content">
-        <h1>Tela de Pessoas!</h1>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:rich="http://richfaces.org/rich">
+	<ui:define name="content">
+		<h1>Tela de Pessoas!</h1>
 
-        <div>
-            <p>Listagem de Pessoas</p>
-        </div>
+		<fieldset>
+			<legend>Inserção de novo funcionário</legend>
+			<h:form id="newPessoa">
+				<div>
+					<label>Nome</label>
+					<h:inputText value="#{pessoaController.newPessoa.nome}" />
+				</div>
+				<div>
+					<label>Sobrenome</label>
+					<h:inputText value="#{pessoaController.newPessoa.sobrenome}">
+					</h:inputText>
+				</div>
+				<div>
+					<label>CPF</label>
+					<h:inputText value="#{pessoaController.newPessoa.cpf}">
+					</h:inputText>
+				</div>
+				<div>
+					<label>Data de Nascimento</label>
+					<rich:calendar enableManualInput="false" id="entryDate"
+						datePattern="dd/MM/yyyy"
+						value="#{pessoaController.newPessoa.nascimento}"
+						label="Entry Date">
+					</rich:calendar>
 
-		<h:dataTable var="listPessoas" value="#{listPessoas}">
-			<h:column>
-				<h:outputText value="#{listPessoas.id}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoas.cpf}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoas.nome}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoas.sobrenome}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoas.nascimento}"/>
-			</h:column>
-		</h:dataTable>
-    </ui:define>
+				</div>
+				<h:commandButton action="#{pessoaController.register}"
+					value="salvar">
+				</h:commandButton>
+			</h:form>
+		</fieldset>
+
+		<fieldset>
+			<legend>Listagem de pessoas</legend>
+			<h:dataTable var="listPessoasDataTable" value="#{listPessoas}"
+				styleClass="simpletablestyle">
+				<h:column>
+					<h:outputText value="#{listPessoasDataTable.cpf}" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{listPessoasDataTable.id}" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{listPessoasDataTable.nascimento}" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{listPessoasDataTable.nome}" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{listPessoasDataTable.sobrenome}" />
+				</h:column>
+			</h:dataTable>
+		</fieldset>
+
+	</ui:define>
 </ui:composition>

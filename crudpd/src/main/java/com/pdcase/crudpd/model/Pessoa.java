@@ -1,18 +1,27 @@
 package com.pdcase.crudpd.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "pessoa_teste")
-public class Pessoa {
+public class Pessoa implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@GeneratedValue
+	@SequenceGenerator(name = "PESSOA_TESTE_SEQ", sequenceName = "PESSOA_TESTE_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_TESTE_SEQ")	
 	@Column(name = "id")
 	private int id;
 
@@ -25,9 +34,8 @@ public class Pessoa {
 	@Column(name = "cpf")
 	private String cpf;
 
-	@Column(name = "nascimento")	
+	@Column(name = "nascimento")
 	private Date nascimento;
-	
 
 	public int getId() {
 		return id;
@@ -67,6 +75,6 @@ public class Pessoa {
 
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
-	}		
-	
+	}
+
 }
