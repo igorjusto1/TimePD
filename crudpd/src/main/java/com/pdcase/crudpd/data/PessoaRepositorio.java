@@ -21,11 +21,11 @@ public class PessoaRepositorio {
 	@Resource
 	UserTransaction ut;
 
-	public Pessoa findById(Long id) {
+	public Pessoa findById(int id) {
 		return em.find(Pessoa.class, id);
 	}
 
-	public void deleteById(Long id) {
+	public void deleteById(int id) {
 		try {
 			ut.begin();
 		} catch (Exception e) {

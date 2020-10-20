@@ -29,38 +29,8 @@
             <h3>Your application can run on:</h3>
             <img src="resources/gfx/wildfly_400x130.jpg" />
         </div>
-		<h:form id="newPessoa" value="#{newPessoa}">
-			<div style="float: left">
-				<label>Nome</label>
-				<h:inputText value="#{newPessoa.nome}">
-				</h:inputText>
-			</div>
-			<div style="float: left">
-				<label>Sobrenome</label>
-				<h:inputText value="#{newPessoa.sobrenome}">
-				</h:inputText>
-			</div>
-			<h:commandButton action="#{pessoaController.register}" value="salvar"> 
-			</h:commandButton>
-		</h:form>
-        
-		<h:dataTable var="listPessoasDataTable" value="#{listPessoas}" styleClass="simpletablestyle">
-			<h:column>
-				<h:outputText value="#{listPessoasDataTable.cpf}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoasDataTable.id}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoasDataTable.nascimento}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoasDataTable.nome}"/>
-			</h:column>
-			<h:column>
-				<h:outputText value="#{listPessoasDataTable.sobrenome}"/>
-			</h:column>
-		</h:dataTable>
+		
+		<a href="/crudpd/pages/pessoa/index.xhtml">Página de pessoas</a>
         
  
        

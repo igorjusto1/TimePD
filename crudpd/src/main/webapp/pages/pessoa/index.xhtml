@@ -27,6 +27,8 @@
 		<fieldset>
 			<legend>Inserção de novo funcionário</legend>
 			<h:form id="newPessoa">
+				<h:inputHidden value="#{pessoaController.newPessoa.id}">
+				</h:inputHidden>
 				<div>
 					<label>Nome</label>
 					<h:inputText value="#{pessoaController.newPessoa.nome}" />
@@ -58,24 +60,39 @@
 
 		<fieldset>
 			<legend>Listagem de pessoas</legend>
-			<h:dataTable var="listPessoasDataTable" value="#{listPessoas}"
+			<h:dataTable var="pessoa" value="#{pessoaController.getAllPessoas()}"
 				styleClass="simpletablestyle">
 				<h:column>
-					<h:outputText value="#{listPessoasDataTable.cpf}" />
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{pessoa.cpf}" />
 				</h:column>
 				<h:column>
-					<h:outputText value="#{listPessoasDataTable.id}" />
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{pessoa.nome}" />
 				</h:column>
 				<h:column>
-					<h:outputText value="#{listPessoasDataTable.nascimento}" />
+					<f:facet name="header">Sobrenome</f:facet>
+					<h:outputText value="#{pessoa.sobrenome}" />
 				</h:column>
 				<h:column>
-					<h:outputText value="#{listPessoasDataTable.nome}" />
+					<f:facet name="header">Ações</f:facet>
+
+					<h:form>
+						<h:commandButton action="#{pessoaController.edit(pessoa.id)}"
+							value="E">
+						</h:commandButton>
+					</h:form>
+
+					<h:form>
+						<h:commandButton action="#{pessoaController.delete(pessoa.id)}"
+							value="D">
+						</h:commandButton>
+					</h:form>
+
 				</h:column>
-				<h:column>
-					<h:outputText value="#{listPessoasDataTable.sobrenome}" />
-				</h:column>
+
 			</h:dataTable>
+
 		</fieldset>
 
 	</ui:define>

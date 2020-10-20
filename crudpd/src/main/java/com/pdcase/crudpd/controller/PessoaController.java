@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,6 +34,10 @@ public class PessoaController implements Serializable {
 	@Inject
 	private Pessoa newPessoa;
 	
+	@Inject
+	private PessoaRepositorio pr;
+
+	
 
 	public Pessoa getNewPessoa() {
 		return newPessoa;
@@ -41,20 +46,21 @@ public class PessoaController implements Serializable {
 	public void setNewPessoa(Pessoa newPessoa) {
 		this.newPessoa = newPessoa;
 	}
-
-	@Inject
-	private PessoaRepositorio pr;
-
-	@Produces
-	@Named
-	private List<Pessoa> listPessoas;
-
+	
+	
 	@PostConstruct
 	public void initNewPessoa() {
+		
 		newPessoa = new Pessoa();
-		listPessoas = pr.getListPessoas();
+		
+	}
+	
+	
+	public List<Pessoa> getAllPessoas(){
+		return pr.getListPessoas();
 	}
 
+	// Salva o objeto salvo no request
 	public void register() throws Exception {
 		try {
 			pessoaRegistration.register(newPessoa);
@@ -64,6 +70,35 @@ public class PessoaController implements Serializable {
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
+			facesContext.addMessage(null, m);
+		}
+	}
+
+	// Apaga o objeto passado por id no request
+	public void delete(int id) throws Exception {
+		try {
+			pessoaRegistration.delete(id);
+			
+			
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Apagado!", "Registro apagado");
+			facesContext.addMessage(null, m);
+			initNewPessoa();
+		} catch (Exception e) {
+			String errorMessage = getRootErrorMessage(e);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registro não apagado");
+			facesContext.addMessage(null, m);
+		}
+	}
+	
+	// Carrega o objeto passado por id para edição
+	public void edit(int id) throws Exception {
+		try {
+			newPessoa = pessoaRegistration.edit(id);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Encontrado!", "Registro encontrado");
+			facesContext.addMessage(null, m);
+		} catch (Exception e) {
+			String errorMessage = getRootErrorMessage(e);
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registro não encontrado");
 			facesContext.addMessage(null, m);
 		}
 	}
@@ -86,5 +121,7 @@ public class PessoaController implements Serializable {
 		// This is the root cause message
 		return errorMessage;
 	}
+
+
 
 }

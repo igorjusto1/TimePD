@@ -10,17 +10,32 @@ import com.pdcase.crudpd.model.Pessoa;
 
 public class PessoaRegistration {
 	@Inject
-    private Logger log;
+	private Logger log;
 
-    @Inject
-    private PessoaRepositorio pr;
+	@Inject
+	private PessoaRepositorio pr;
 
-    @Inject
-    private Event<Pessoa> pessoaEventSrc;
+	@Inject
+	private Event<Pessoa> pessoaEventSrc;
 
-    public void register(Pessoa pessoa) throws Exception {
-        log.info("Registering " + pessoa.getNome());
-        pr.saveOrUpdate(pessoa);
-        pessoaEventSrc.fire(pessoa);
-    }
+	public void register(Pessoa pessoa) throws Exception {
+		log.info("Registering " + pessoa.getNome());
+		pr.saveOrUpdate(pessoa);
+		pessoaEventSrc.fire(pessoa);
+	}
+
+	public Pessoa edit(int id) {
+		return pr.findById(id);
+	}
+
+	public void delete(int id) {
+		Pessoa pessoa = pr.findById(id);
+
+		log.info("Apagando " + pessoa.getNome());
+
+		pr.deleteById(id);
+
+		pessoaEventSrc.fire(pessoa);
+
+	}
 }
