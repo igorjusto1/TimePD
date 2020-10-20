@@ -13,11 +13,15 @@ import javax.transaction.UserTransaction;
 
 import com.pdcase.crudpd.model.Pessoa;
 
+// Persistence Context serve pra definir qual configuração de acesso a banco de dados pra usar
 @PersistenceContext(name = "rcb_PU")
 public class PessoaRepositorio {
+	
+	// Gerenciador de acesso ao banco
 	@PersistenceContext
 	EntityManager em;
 
+	// Métodos para gerenciamento de transação
 	@Resource
 	UserTransaction ut;
 
