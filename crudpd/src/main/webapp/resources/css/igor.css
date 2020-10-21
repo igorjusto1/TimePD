@@ -1,0 +1,19 @@
+#settings {
+	display: grid;
+	grid-template-columns: max-content max-content;
+	grid-gap: 5px;
+}
+
+label {
+	width: initial;
+}
+
+form {
+	width: initial;
+	border:initial;
+	padding: initial;
+}
+
+.label {
+	text-align: left;
+}
