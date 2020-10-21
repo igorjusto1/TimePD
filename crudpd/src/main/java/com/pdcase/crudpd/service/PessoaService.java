@@ -19,7 +19,7 @@ public class PessoaService {
 	@Inject
 	private Event<Pessoa> pessoaEventSrc;
 
-	public void register(Pessoa pessoa) throws Exception {
+	public void register(Pessoa pessoa) {
 		log.info("Registering " + pessoa.getNome());
 		pr.saveOrUpdate(pessoa);
 		pessoaEventSrc.fire(pessoa);
