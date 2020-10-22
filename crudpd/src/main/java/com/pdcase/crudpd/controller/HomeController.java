@@ -25,5 +25,10 @@ public class HomeController implements Serializable {
 	public String bibliotecaIndex() {
 		return bibliotecaIndex;
 	}
-
+	
+	private String estadoIndex = "estado/index";
+	
+	public String estadoIndex() {
+		return estadoIndex;
+	}
 }
