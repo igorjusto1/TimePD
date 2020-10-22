@@ -31,15 +31,15 @@
 			<img src="resources/gfx/wildfly_400x130.jpg" />
 		</div>
 		<h:form>
-			<p:commandButton action="#{homeController.pessoaIndex}"
+			<p:commandButton action="#{homeController.pessoaIndex}" ajax="false"
 				value="Página de pessoas">
 			</p:commandButton>
 		</h:form>
-		
+
 		<h:form>
-			<h:commandButton action="pages/biblioteca/index"
+			<p:commandButton action="#{homeController.bibliotecaIndex}" ajax="false"
 				value="Cadastro de livros">
-			</h:commandButton>
+			</p:commandButton>
 		</h:form>
 	</ui:define>
 </ui:composition>

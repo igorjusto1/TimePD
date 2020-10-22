@@ -96,7 +96,7 @@
 					<div class="label"></div>
 					<div>
 						<p:commandButton action="#{pessoaController.register}"
-							style="text-align:right;" icon="pi pi-save">
+							ajax="false" style="text-align:right;" icon="pi pi-save">
 						</p:commandButton>
 					</div>
 				</div>
@@ -123,7 +123,7 @@
 			<p:column>
 				<f:facet name="header">Data de Nascimento</f:facet>
 				<h:outputText value="#{pessoa.nascimento}">
-				  <f:convertDateTime pattern="dd/MM/yyyy" />
+					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:outputText>
 			</p:column>
 			<p:column>
@@ -131,14 +131,14 @@
 
 				<h:form style="float: left;">
 					<p:commandButton style="float: left;"
-						action="#{pessoaController.edit(pessoa.id)}"
+						action="#{pessoaController.edit(pessoa.id)}" ajax="false"
 						icon="pi pi-user-edit">
 					</p:commandButton>
 				</h:form>
 
 				<h:form style="float: left;">
 					<p:commandButton action="#{pessoaController.delete(pessoa.id)}"
-						icon="pi pi-user-plus">
+						ajax="false" icon="pi pi-user-minus">
 					</p:commandButton>
 				</h:form>
 			</p:column>
