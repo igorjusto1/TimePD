@@ -16,7 +16,7 @@ public class HomeController implements Serializable {
 
 	private String pessoaIndex = "pessoa/index";
 
-	public String pessoaIndex() {
+	public String pessoaIndex() {		
 		return pessoaIndex;
 	}
 
