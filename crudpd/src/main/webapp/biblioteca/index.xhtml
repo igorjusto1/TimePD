@@ -29,9 +29,9 @@
 			<h:outputStylesheet name="css/keila.css" />
 		</h:head>
 	
-		<h1>Cadastros de livros!</h1>
+		<h1 style="font-weight:bold">Cadastros de livros!</h1>
 		
-		<fieldset>
+		<fieldset style="font-weight:bold">
 			<h3>Adicionar novo livro</h3>
 			<h:graphicImage value="/resources/gfx/livro.jpg" />
 			<h:form id="newLivro">
@@ -40,36 +40,44 @@
 				<div>
 					<label>Nome do livro</label>
 					<p:inputText id="livro"
-						value="#{bibliotecaController.newLivro.nome_livro}" />
+						value="#{bibliotecaController.newLivro.nome_livro}"
+						required="true" />
 				</div>
 				<div>
 					<label>Nome do autor</label>
 					<p:inputText id="autor"
-						value="#{bibliotecaController.newLivro.nome_autor}">
+						value="#{bibliotecaController.newLivro.nome_autor}"
+						required="true">
 					</p:inputText>
 				</div>
 				<div>
 					<label>Editora</label>
 					<p:inputText id="editora"
-						value="#{bibliotecaController.newLivro.editora}">
+						value="#{bibliotecaController.newLivro.editora}"
+						required="true">
 					</p:inputText>
 				</div>
 				<div>
 					<label>Quantidade de páginas</label>
 					<p:inputText id="paginas"
-						value="#{bibliotecaController.newLivro.paginas}">
+						value="#{bibliotecaController.newLivro.paginas}"
+						required="true">
 					</p:inputText>
 				</div>
 				<div>
 					<label>Descrição</label>
 					<p:inputText id="descricao"
-						value="#{bibliotecaController.newLivro.descricao}"></p:inputText>
+						value="#{bibliotecaController.newLivro.descricao}"
+						required="true">
+					</p:inputText>
 				</div>
 				<div>
 					<label>Data de publicação</label>
 					<p:calendar id="popup" pattern="dd/MM/yyyy" showOn="button"
 						mask="true"
-						value="#{bibliotecaController.newLivro.data_publicacao}" />
+						value="#{bibliotecaController.newLivro.data_publicacao}"
+						required="true"
+					 />
 
 				</div>
 				<p:commandButton action="#{bibliotecaController.register}"
@@ -78,7 +86,7 @@
 			</h:form>
 		</fieldset>
 
-		<fieldset>
+		<fieldset style="font-weight:bold">
 			<h3>Listagem de livros</h3>
 			<h:dataTable var="livro"
 				value="#{bibliotecaController.getAllLivros()}"
