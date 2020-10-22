@@ -16,26 +16,30 @@
     limitations under the License.
 -->
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/default.xhtml">
-    <ui:define name="content">
-        <h1>Welcome to WildFly!</h1>
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+		<h1>Welcome to WildFly!</h1>
 
-        <div>
-            <p>You have successfully deployed a Java EE 7 Enterprise
-                Application.</p>
-            <h3>Your application can run on:</h3>
-            <img src="resources/gfx/wildfly_400x130.jpg" />
-        </div>
+		<div>
+			<p>You have successfully deployed a Java EE 7 Enterprise
+				Application.</p>
+			<h3>Your application can run on:</h3>
+			<img src="resources/gfx/wildfly_400x130.jpg" />
+		</div>
 		<h:form>
-		<h:commandButton action="pages/pessoa/index" value="Página de pessoas">
-		
-		</h:commandButton>
+			<p:commandButton action="#{homeController.pessoaIndex}"
+				value="Página de pessoas">
+			</p:commandButton>
 		</h:form>
-        
- 
-       
-    </ui:define>
+		
+		<h:form>
+			<h:commandButton action="pages/biblioteca/index"
+				value="Cadastro de livros">
+			</h:commandButton>
+		</h:form>
+	</ui:define>
 </ui:composition>

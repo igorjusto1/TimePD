@@ -4,12 +4,24 @@
   SHAPE="160,104,50,25" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
    PATH="/index.xhtml" model-entity="JSFProcessItem">
+<<<<<<< HEAD
+   <PROCESS-ITEM-OUTPUT ID="index::#pessoa#index.xhtml" NAME="output"
+    PATH="/pessoa/index.xhtml" TARGET="rules:#pessoa#index.xhtml"
+    TITLE="index" model-entity="JSFProcessItemOutput"/>
+=======
    <PROCESS-ITEM-OUTPUT ID="index::#pages#pessoa#index.xhtml"
     NAME="output" PATH="/pages/pessoa/index.xhtml"
     TARGET="rules:#pages#pessoa#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="index::#pages#biblioteca#index.xhtml"
+    NAME="output1" PATH="/pages/biblioteca/index.xhtml"
+    TARGET="rules:#pages#biblioteca#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
+>>>>>>> 0c1de59026e2a3ce5264f4ea1c012f79cd195c69
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#pessoa#index.xhtml"
-  PATH="/pages/pessoa/index.xhtml" SHAPE="356,276,0,0"
+ <PROCESS-ITEM NAME="rules:#pessoa#index.xhtml"
+  PATH="/pessoa/index.xhtml" SHAPE="310,190,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#biblioteca#index.xhtml"
+  PATH="/pages/biblioteca/index.xhtml" SHAPE="362,162,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
