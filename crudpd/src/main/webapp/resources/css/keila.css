@@ -1,9 +1,34 @@
 #newLivro {
 	text-align:left;
-	font-size:12px;
+	font-size:12px;	
 }
 
-input {
-  margin-bottom: 16px;
-  Width: 300px;
+#newLivro input {
+	color:blue;
+	margin-bottom: 16px;
+  	Width: 300px;
+}
+
+#newLivro label {
+	color:red;
+}
+
+form {
+	width: initial;
+	border-width: initial;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+
+fieldset{
+	border-width: initial;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    color:blue;
+}
+
+#tabela {
+	background-color:black;
 }

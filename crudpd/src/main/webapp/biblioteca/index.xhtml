@@ -28,42 +28,42 @@
 		<h:head>
 			<h:outputStylesheet name="css/keila.css" />
 		</h:head>
-
+	
 		<h1>Cadastros de livros!</h1>
-
+		
 		<fieldset>
-			<legend>Adicionar novo livro</legend>
+			<h3>Adicionar novo livro</h3>
 			<h:graphicImage value="/resources/gfx/livro.jpg" />
 			<h:form id="newLivro">
 				<h:inputHidden value="#{bibliotecaController.newLivro.id}">
 				</h:inputHidden>
 				<div>
 					<label>Nome do livro</label>
-					<h:inputText id="livro"
+					<p:inputText id="livro"
 						value="#{bibliotecaController.newLivro.nome_livro}" />
 				</div>
 				<div>
 					<label>Nome do autor</label>
-					<h:inputText id="autor"
+					<p:inputText id="autor"
 						value="#{bibliotecaController.newLivro.nome_autor}">
-					</h:inputText>
+					</p:inputText>
 				</div>
 				<div>
 					<label>Editora</label>
-					<h:inputText id="editora"
+					<p:inputText id="editora"
 						value="#{bibliotecaController.newLivro.editora}">
-					</h:inputText>
+					</p:inputText>
 				</div>
 				<div>
 					<label>Quantidade de páginas</label>
-					<h:inputText id="paginas"
+					<p:inputText id="paginas"
 						value="#{bibliotecaController.newLivro.paginas}">
-					</h:inputText>
+					</p:inputText>
 				</div>
 				<div>
 					<label>Descrição</label>
-					<h:inputText id="descricao"
-						value="#{bibliotecaController.newLivro.descricao}"></h:inputText>
+					<p:inputText id="descricao"
+						value="#{bibliotecaController.newLivro.descricao}"></p:inputText>
 				</div>
 				<div>
 					<label>Data de publicação</label>
@@ -72,57 +72,57 @@
 						value="#{bibliotecaController.newLivro.data_publicacao}" />
 
 				</div>
-				<h:commandButton action="#{bibliotecaController.register}"
-					value="Salvar">
-				</h:commandButton>
+				<p:commandButton action="#{bibliotecaController.register}"
+					icon="pi pi-save" ajax="false">
+				</p:commandButton>
 			</h:form>
 		</fieldset>
 
 		<fieldset>
-			<legend>Listagem de livros</legend>
+			<h3>Listagem de livros</h3>
 			<h:dataTable var="livro"
 				value="#{bibliotecaController.getAllLivros()}"
-				styleClass="simpletablestyle">
-				<h:column>
+				styleClass="simpletablestyle" id="tabela">
+				<p:column>
 					<f:facet name="header">Nome do livro</f:facet>
 					<h:outputText value="#{livro.nome_livro}" />
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">Nome do autor</f:facet>
 					<h:outputText value="#{livro.nome_autor}" />
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">Editora</f:facet>
 					<h:outputText value="#{livro.editora}" />
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">Quantidade de paginas</f:facet>
 					<h:outputText value="#{livro.paginas}" />
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">Data de publicação</f:facet>
 					<h:outputText value="#{livro.data_publicacao}" />
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{livro.descricao}" />
-				</h:column>
-				<h:column>
+				</p:column>
+				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
 					<h:form>
-						<h:commandButton action="#{bibliotecaController.edit(livro.id)}"
-							value="Editar">
-						</h:commandButton>
+						<p:commandButton action="#{bibliotecaController.edit(livro.id)}"
+							icon="pi pi-refresh" ajax="false">
+						</p:commandButton>
 					</h:form>
 
 					<h:form>
-						<h:commandButton action="#{bibliotecaController.delete(livro.id)}"
-							value="Delete">
-						</h:commandButton>
+						<p:commandButton action="#{bibliotecaController.delete(livro.id)}"
+							icon="pi pi-minus-circle" ajax="false">
+						</p:commandButton>
 					</h:form>
 
-				</h:column>
+				</p:column>
 
 			</h:dataTable>
 
