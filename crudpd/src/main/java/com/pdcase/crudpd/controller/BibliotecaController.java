@@ -10,9 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.pdcase.crudpd.model.Biblioteca;
-import com.pdcase.crudpd.model.Pessoa;
 import com.pdcase.crudpd.service.BibliotecaService;
-import com.pdcase.crudpd.service.PessoaService;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
 @Named

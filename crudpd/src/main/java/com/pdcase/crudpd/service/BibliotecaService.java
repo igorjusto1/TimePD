@@ -7,9 +7,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import com.pdcase.crudpd.data.BibliotecaRepositorio;
-import com.pdcase.crudpd.data.PessoaRepositorio;
 import com.pdcase.crudpd.model.Biblioteca;
-import com.pdcase.crudpd.model.Pessoa;
 
 public class BibliotecaService {
 	@Inject
