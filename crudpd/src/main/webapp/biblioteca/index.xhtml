@@ -110,13 +110,13 @@
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
-					<h:form>
+					<h:form style="float: left;">
 						<p:commandButton action="#{bibliotecaController.edit(livro.id)}"
 							icon="pi pi-refresh" ajax="false">
 						</p:commandButton>
 					</h:form>
 
-					<h:form>
+					<h:form style="float: left;">
 						<p:commandButton action="#{bibliotecaController.delete(livro.id)}"
 							icon="pi pi-minus-circle" ajax="false">
 						</p:commandButton>
