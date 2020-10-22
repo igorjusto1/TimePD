@@ -32,18 +32,18 @@
 		</div>
 		<h:form>
 
-			<p:commandButton action="pages/pessoa/index"
-				value="Página de pessoas">
+			<p:commandButton action="#{homeController.pessoaIndex}" ajax="false"
 
+				value="Página de pessoas">
 			</p:commandButton>
 		</h:form>
+
 		<h:form>
-			<p:commandButton action="pages/biblioteca/index"
+
+			<p:commandButton action="#{homeController.bibliotecaIndex}" ajax="false"
+
 				value="Cadastro de livros">
 			</p:commandButton>
 		</h:form>
-
-
-
 	</ui:define>
 </ui:composition>

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,9 +25,8 @@ public class PessoaController implements Serializable {
 	// Camada de service
 	@Inject
 	private PessoaService pessoaService;
-	
-	
-	//Logger pra erros
+
+	// Logger pra erros
 	private transient Logger log;
 
 	// Modelo utilizado durante os requests
@@ -43,10 +41,7 @@ public class PessoaController implements Serializable {
 		this.newPessoa = newPessoa;
 	}
 
-	@PostConstruct
-	public void initNewPessoa() {
-		newPessoa = new Pessoa();
-	}
+
 
 	public List<Pessoa> getAllPessoas() {
 		return pessoaService.getAllPessoas();
@@ -57,7 +52,8 @@ public class PessoaController implements Serializable {
 		try {
 			pessoaService.register(newPessoa);
 
-			initNewPessoa();
+			newPessoa = new Pessoa();
+		
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
@@ -67,8 +63,7 @@ public class PessoaController implements Serializable {
 	public void delete(int id) {
 		try {
 			pessoaService.delete(id);
-
-			initNewPessoa();
+			newPessoa = new Pessoa();
 		} catch (Exception e) {
 
 			log.info(e.getMessage());
@@ -79,7 +74,6 @@ public class PessoaController implements Serializable {
 	public void edit(int id) {
 		try {
 			newPessoa = pessoaService.edit(id);
-
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
