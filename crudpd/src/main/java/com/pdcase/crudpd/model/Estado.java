@@ -22,16 +22,16 @@ public class Estado implements Serializable {
 	
 	/* NOTA: TODOS OS CAMPOS SÃO NOT NULL */
 
-	@Column(name = "id_estado") // PK
+	@Column(name = "id_estado", nullable = false) // PK
 	private int idEstado;
 
-	@Column(name = "sigla_estado")
+	@Column(name = "sigla_estado", nullable = false)
 	private String siglaEstado;
 
-	@Column(name = "nome_estado")
+	@Column(name = "nome_estado", nullable = false)
 	private String nomeEstado;
 
-	public int getId_Estado() {
+	public int getIdEstado() {
 		return idEstado;
 	}
 
