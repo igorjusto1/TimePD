@@ -4,12 +4,12 @@
   SHAPE="160,104,50,25" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#index.xhtml:0" NAME="item"
    PATH="/index.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="index::#pages#pessoa#index.xhtml"
-    NAME="output" PATH="/pages/pessoa/index.xhtml"
-    TARGET="rules:#pages#pessoa#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="index::#pessoa#index.xhtml" NAME="output"
+    PATH="/pessoa/index.xhtml" TARGET="rules:#pessoa#index.xhtml"
+    TITLE="index" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#pessoa#index.xhtml"
-  PATH="/pages/pessoa/index.xhtml" SHAPE="356,276,0,0"
+ <PROCESS-ITEM NAME="rules:#pessoa#index.xhtml"
+  PATH="/pessoa/index.xhtml" SHAPE="310,190,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
