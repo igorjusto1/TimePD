@@ -30,16 +30,14 @@
 			<h3>Your application can run on:</h3>
 			<img src="resources/gfx/wildfly_400x130.jpg" />
 		</div>
-		<h:form>
-			<p:commandButton action="#{homeController.pessoaIndex}" ajax="false"
-				value="Página de pessoas">
-			</p:commandButton>
-		</h:form>
+		<p:linkButton outcome="#{homeController.pessoaIndex()}"
+			value="Página de pessoas">
+		</p:linkButton>
 
-		<h:form>
-			<p:commandButton action="#{homeController.bibliotecaIndex}" ajax="false"
-				value="Cadastro de livros">
-			</p:commandButton>
-		</h:form>
+
+		<p:linkButton outcome="#{homeController.bibliotecaIndex()}"
+			value="Cadastro de livros">
+		</p:linkButton>
+
 	</ui:define>
 </ui:composition>
