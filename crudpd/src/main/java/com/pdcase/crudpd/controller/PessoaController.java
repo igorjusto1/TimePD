@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,10 +20,13 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
 import com.pdcase.crudpd.model.Pessoa;
 import com.pdcase.crudpd.service.PessoaService;
+import com.pdcase.crudpd.util.CpfConverter;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
 @Named
@@ -51,10 +55,11 @@ public class PessoaController implements Serializable {
 	// File para upload csv
 	private UploadedFile fileUpload;
 
+	// file para download de csv
+	private StreamedContent fileDownload;
+
 	@Inject
 	private FacesContext facesContext;
-
-
 
 	public Pessoa getNewPessoa() {
 		return newPessoa;
@@ -72,18 +77,32 @@ public class PessoaController implements Serializable {
 		this.pessoas = pessoas;
 	}
 
-	public UploadedFile getFile() {
+	public UploadedFile getFileUpload() {
 		return fileUpload;
 	}
 
-	public void setFile(UploadedFile file) {
-		this.fileUpload = file;
+	public void setFileUpload(UploadedFile fileUpload) {
+		this.fileUpload = fileUpload;
+	}
+
+	public StreamedContent getFileDownload() {
+		return fileDownload;
+	}
+
+	public void setFileDownload(StreamedContent fileDownload) {
+		this.fileDownload = fileDownload;
 	}
 
 	@PostConstruct
 	public void init() {
-		pessoas = pessoaService.getAllPessoas();
+		refreshList();
 		newPessoa = new Pessoa();
+	}
+	
+	public void refreshList()
+	{
+
+		pessoas = pessoaService.getAllPessoas();
 	}
 
 	// Salva o objeto salvo no request
@@ -158,7 +177,7 @@ public class PessoaController implements Serializable {
 					newPessoa.setNascimento(convertParaDateTime(i, spli[3]));
 					i++;
 
-					register();
+					pessoaService.register(newPessoa);
 
 				}
 			} catch (IOException e) {
@@ -171,6 +190,32 @@ public class PessoaController implements Serializable {
 			FacesMessage message = new FacesMessage("Successful", fileUpload.getFileName() + " carregado.");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 		}
+	}
+
+	public void download() {
+		StringBuilder linhas = new StringBuilder("Id;Nome;Sobrenome;Cpf;Data de Nascimento");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		for (Pessoa p : pessoas) {
+			StringBuilder linha = new StringBuilder();
+
+			linha.append(p.getId());
+			linha.append(";");
+			linha.append(p.getNome());
+			linha.append(";");
+			linha.append(p.getSobrenome());
+			linha.append(";");
+			linha.append(CpfConverter.formatCpf(p.getCpf()));
+			linha.append(";");
+			linha.append(formatter.format(p.getNascimento()));
+			linha.append(";\r\n");
+
+			linhas.append(linha);
+		}
+
+		InputStream is = new ByteArrayInputStream(linhas.toString().getBytes(Charset.forName("UTF-8")));
+		fileDownload = DefaultStreamedContent.builder().name("lista.csv").contentType("text/csv").stream(() -> is)
+				.build();
+
 	}
 
 	/**
