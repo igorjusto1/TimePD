@@ -1,3 +1,9 @@
+#settings {
+	display: grid;
+	grid-template-columns: max-content max-content;
+	grid-gap: 5px;
+}
+
 #newLivro {
 	text-align:left;
 	font-size:12px;	
@@ -7,18 +13,18 @@
 	color:white;
 	margin-bottom: 16px;
   	Width: 300px;
+  	text-align: left;
 }
 
 #newLivro label {
 	color:red;
+	text-align: left;
 }
 
 form {
 	width: initial;
-	border-width: initial;
-    border-style: initial;
-    border-color: initial;
-    border-image: initial;
+	border:initial;
+	padding: initial;
 }
 
 fieldset{
@@ -31,4 +37,24 @@ fieldset{
 
 #tabela {
 	background-color:black;
+}
+
+.texto {
+	text-align: left;
+}
+
+label {
+	width: initial;
+  	margin-left: initial;
+  	margin-right: inital;
+  	padding-top: initial;
+  	text-align: initial;
+}
+
+.botoes {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width:68px;
 }
