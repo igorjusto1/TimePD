@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.pdcase.crudpd.model.Estado;
 import com.pdcase.crudpd.service.EstadoService;
 
+@Named
+@RequestScoped
 public class EstadoController implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
