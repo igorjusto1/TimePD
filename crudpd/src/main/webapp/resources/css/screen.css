@@ -116,9 +116,8 @@ label {
   font-weight: bold;
   /*color:#363636;*/
 }
-
 input {
-  
+  margin-bottom: 8px;
 }
 .register {
   float: left;
@@ -201,5 +200,3 @@ input {
   color:#3883ce;
   text-decoration:none; 
 }
-
-

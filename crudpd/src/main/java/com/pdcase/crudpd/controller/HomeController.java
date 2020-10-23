@@ -31,4 +31,10 @@ public class HomeController implements Serializable {
 	public String estadoIndex() {
 		return estadoIndex;
 	}
+	
+	private String cadastroIndex = "cadastro/index";
+	
+	public String cadastroIndex() {
+		return cadastroIndex;
+	}
 }
