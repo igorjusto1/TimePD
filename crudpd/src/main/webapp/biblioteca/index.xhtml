@@ -21,11 +21,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml"
 	xmlns:rich="http://richfaces.org/rich"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 	<ui:define name="content">
 	
 		<h:head>
+		
+		<h:outputStylesheet name="primeicons/primeicons.css"
+				library="primefaces" />
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/all.min-jsf.css" />
+			<h:outputStylesheet library="webjars"
+				name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+				
 			<h:outputStylesheet name="css/keila.css" />
 		</h:head>
 	
@@ -34,62 +43,103 @@
 		<fieldset style="font-weight:bold">
 			<h3>Adicionar novo livro</h3>
 			<h:graphicImage value="/resources/gfx/livro.jpg" />
-			<h:form id="newLivro">
+			
+			<p:growl id="messages" showDetail="true" />
+			
+			<h:form id="newLivro" enctype="multipart/form-data">
+			<p:messages>
+					<p:autoUpdate />
+				</p:messages>
 				<h:inputHidden value="#{bibliotecaController.newLivro.id}">
 				</h:inputHidden>
+			
+			<div id="settings">
+				<div class="texto">
+					<h:outputLabel for="nome_livro" value="Nome do livro:" style="font-weight:bold" />
+				</div>
+				
 				<div>
-					<label>Nome do livro</label>
 					<p:inputText id="livro"
 						value="#{bibliotecaController.newLivro.nome_livro}"
-						required="true" />
+						required="true" label="Nome do livro:" />
+						<p:message for="livro" />
 				</div>
+				
+				<div class="texto">
+					<h:outputLabel for="nome_autor" value="Nome do autor:" style="font-weight:bold" />
+				</div>
+				
 				<div>
-					<label>Nome do autor</label>
 					<p:inputText id="autor"
 						value="#{bibliotecaController.newLivro.nome_autor}"
-						required="true">
+						required="true" label="Nome do autor:">
 					</p:inputText>
+					<p:message for="autor" />
 				</div>
+				
+				<div class="texto">
+					<h:outputLabel for="editora" value="Editora:" style="font-weight:bold" />
+				</div>
+				
 				<div>
-					<label>Editora</label>
 					<p:inputText id="editora"
 						value="#{bibliotecaController.newLivro.editora}"
-						required="true">
+						required="true" label="Editora:">
 					</p:inputText>
+					<p:message for="editora" />
 				</div>
+				
+				<div class="texto">
+					<h:outputLabel for="paginas" value="Páginas:" style="font-weight:bold" />
+				</div>
+				
 				<div>
-					<label>Quantidade de páginas</label>
 					<p:inputText id="paginas"
 						value="#{bibliotecaController.newLivro.paginas}"
-						required="true">
+						required="true" label="Páginas:">
 					</p:inputText>
+					<p:message for="paginas" />
 				</div>
+				
+				<div class="texto">
+					<h:outputLabel for="descricao" value="Descrição:" style="font-weight:bold" />
+				</div>
+				
 				<div>
-					<label>Descrição</label>
 					<p:inputText id="descricao"
 						value="#{bibliotecaController.newLivro.descricao}"
-						required="true">
+						required="true" label="Descrição:">
 					</p:inputText>
+					<p:message for="descricao" />
 				</div>
+				
+				<div class="texto">
+					<h:outputLabel for="publicacao" value="Data de publicação:" style="font-weight:bold" />
+				</div>
+				
 				<div>
-					<label>Data de publicação</label>
-					<p:calendar id="popup" pattern="dd/MM/yyyy" showOn="button"
+					<p:calendar id="publicacao" pattern="dd/MM/yyyy" showOn="button"
 						mask="true"
 						value="#{bibliotecaController.newLivro.data_publicacao}"
-						required="true"
+						required="true" label="Data de publicação:" style="margin-right: 7px;"
 					 />
-
+					 <p:message for="publicacao" />
 				</div>
-				<p:commandButton action="#{bibliotecaController.register}"
-					icon="pi pi-save" ajax="false">
-				</p:commandButton>
+				
+				<div>
+					<p:commandButton action="#{bibliotecaController.register}"
+						icon="pi pi-save" ajax="false">
+					</p:commandButton>
+				</div>
+				
+			</div>
 			</h:form>
 		</fieldset>
 
 		<fieldset style="font-weight:bold">
 			<h3>Listagem de livros</h3>
 			<h:dataTable var="livro"
-				value="#{bibliotecaController.getAllLivros()}"
+				value="#{bibliotecaController.livros}"
 				styleClass="simpletablestyle" id="tabela">
 				<p:column>
 					<f:facet name="header">Nome do livro</f:facet>
@@ -108,32 +158,36 @@
 					<h:outputText value="#{livro.paginas}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Data de publicação</f:facet>
-					<h:outputText value="#{livro.data_publicacao}" />
-				</p:column>
+				<f:facet name="header">Data de Nascimento</f:facet>
+				<h:outputText value="#{livro.data_publicacao}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</p:column>
 				<p:column>
 					<f:facet name="header">Descrição</f:facet>
 					<h:outputText value="#{livro.descricao}" />
 				</p:column>
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
-
-					<h:form style="float: left;">
+					
+					<div class="botoes">
+					<h:form>
 						<p:commandButton action="#{bibliotecaController.edit(livro.id)}"
 							icon="pi pi-refresh" ajax="false">
 						</p:commandButton>
 					</h:form>
 
-					<h:form style="float: left;">
+					<h:form>
 						<p:commandButton action="#{bibliotecaController.delete(livro.id)}"
 							icon="pi pi-minus-circle" ajax="false">
 						</p:commandButton>
 					</h:form>
-
+					</div>
 				</p:column>
-
+				<f:facet name="footer">
+        Total cadastrado -> #{fn:length(bibliotecaController.livros)}. 
+			</f:facet>
 			</h:dataTable>
-
 		</fieldset>
 
 	</ui:define>
