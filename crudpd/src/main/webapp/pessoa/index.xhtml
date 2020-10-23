@@ -21,7 +21,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml"
 	xmlns:rich="http://richfaces.org/rich"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 	<ui:define name="content">
 
 		<h:head>
@@ -35,9 +36,19 @@
 			<h:outputStylesheet name="css/igor.css" />
 		</h:head>
 
-		<h1>Tela de Pessoas!</h1>
+		<h1>Tela de Pessoas</h1>
 
+		<p:growl id="messages" showDetail="true" />
 
+		<h:form enctype="multipart/form-data">
+			<p:panel header="Inserção de pessoas em batch">
+				<p:fileUpload value="#{pessoaController.file}" mode="simple"
+					skinSimple="true" />
+				<br />
+				<p:commandButton icon="pi pi-save" ajax="false"
+					action="#{pessoaController.upload}" />
+			</p:panel>
+		</h:form>
 		<h:form id="newPessoa">
 			<p:panel header="Inserção de nova pessoa">
 				<p:messages>
@@ -96,7 +107,7 @@
 					<div class="label"></div>
 					<div>
 						<p:commandButton action="#{pessoaController.register}"
-							style="text-align:right;" icon="pi pi-save">
+							ajax="false" style="text-align:right;" icon="pi pi-save">
 						</p:commandButton>
 					</div>
 				</div>
@@ -104,7 +115,7 @@
 		</h:form>
 
 
-		<p:dataTable var="pessoa" value="#{pessoaController.getAllPessoas()}">
+		<p:dataTable var="pessoa" value="#{pessoaController.pessoas}">
 			<p:column>
 				<f:facet name="header">CPF</f:facet>
 				<h:outputText value="#{pessoa.cpf}">
@@ -123,7 +134,7 @@
 			<p:column>
 				<f:facet name="header">Data de Nascimento</f:facet>
 				<h:outputText value="#{pessoa.nascimento}">
-				  <f:convertDateTime pattern="dd/MM/yyyy" />
+					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:outputText>
 			</p:column>
 			<p:column>
@@ -131,18 +142,27 @@
 
 				<h:form style="float: left;">
 					<p:commandButton style="float: left;"
-						action="#{pessoaController.edit(pessoa.id)}"
+						action="#{pessoaController.edit(pessoa.id)}" ajax="false"
 						icon="pi pi-user-edit">
 					</p:commandButton>
 				</h:form>
 
 				<h:form style="float: left;">
 					<p:commandButton action="#{pessoaController.delete(pessoa.id)}"
-						icon="pi pi-user-plus">
+						ajax="false" icon="pi pi-user-minus">
 					</p:commandButton>
 				</h:form>
 			</p:column>
-
+			<f:facet name="footer">
+        In total there are #{fn:length(pessoaController.pessoas)} people. 
+<h:form>
+					<p:commandButton value="Download" ajax="false"
+						onclick="PrimeFaces.monitorDownload(start, stop);"
+						icon="pi pi-arrow-down">
+						<p:fileDownload value="#{pessoaController.file}" />
+					</p:commandButton>
+				</h:form>
+			</f:facet>
 		</p:dataTable>
 
 

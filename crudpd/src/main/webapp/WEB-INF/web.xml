@@ -5,6 +5,6 @@
 	id="WebApp_ID" version="3.1">
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>nova-colored</param-value>
+		<param-value>luna-green</param-value>
 	</context-param>
 </web-app>

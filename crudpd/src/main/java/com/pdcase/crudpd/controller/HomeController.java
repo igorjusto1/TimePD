@@ -14,12 +14,21 @@ public class HomeController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
+	private String pessoaIndex = "pessoa/index";
 
-	private String pessoaIndex = "pessoa/index?faces-redirect = true";
-	
-	public String pessoaIndex() {
+	public String pessoaIndex() {		
 		return pessoaIndex;
 	}
 
+	private String bibliotecaIndex = "biblioteca/index";
+
+	public String bibliotecaIndex() {
+		return bibliotecaIndex;
+	}
+	
+	private String estadoIndex = "estado/index";
+	
+	public String estadoIndex() {
+		return estadoIndex;
+	}
 }
