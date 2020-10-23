@@ -96,15 +96,19 @@ public class PessoaController implements Serializable {
 	@PostConstruct
 	public void init() {
 		refreshList();
-		newPessoa = new Pessoa();
+		cleanPessoa();
 	}
 	
 	public void refreshList()
 	{
-
 		pessoas = pessoaService.getAllPessoas();
 	}
+	
+	public void cleanPessoa() {
 
+		newPessoa = new Pessoa();
+	}
+	
 	// Salva o objeto salvo no request
 	public void register() {
 		try {
