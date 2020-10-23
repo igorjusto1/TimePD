@@ -17,10 +17,10 @@ public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L; 
 	
 	@Id
-	@SequenceGenerator(name = "ESTADO_TESTE_SEQ", sequenceName = "ESTADO_TESTE_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ESTADO_TESTE_SEQ")
+	@SequenceGenerator(name = "TB_ESTADO_TESTE_SEQ", sequenceName = "TB_ESTADO_TESTE_SEQ", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_ESTADO_TESTE_SEQ")
 	
-	/* NOTA: TODOS OS CAMPOS SÃO NOT NULL */
+	/* TODOS OS CAMPOS SÃO NOT NULL */
 
 	@Column(name = "id_estado", nullable = false) // PK
 	private int idEstado;
@@ -35,15 +35,15 @@ public class Estado implements Serializable {
 		return idEstado;
 	}
 
-	public void setId(int id) {
+	public void setIdEstado(int id) {
 		this.idEstado = id;
 	}
 
-	public String getSigla_estado() {
+	public String getSiglaEstado() {
 		return siglaEstado;
 	}
 
-	public void setSigla_estado(String siglaEstado) {
+	public void setSiglaEstado(String siglaEstado) {
 		this.siglaEstado = siglaEstado;
 	}
 
