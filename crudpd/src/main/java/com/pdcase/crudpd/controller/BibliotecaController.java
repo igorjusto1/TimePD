@@ -128,7 +128,7 @@ public class BibliotecaController implements Serializable{
 			log.info(e.getMessage());
 		}
 	}
-	
+		
 	private String getRootErrorMessage(Exception e) {
 		// Default to general error message that registration failed.
 		String errorMessage = "Operação falhou. Veja o log do servidor para mais informações";
