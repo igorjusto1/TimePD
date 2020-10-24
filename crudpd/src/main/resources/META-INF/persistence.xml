@@ -23,7 +23,7 @@
 
    <persistence-unit name="rcb_PU" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>	
-		<jta-data-source>java:/rcbDS2</jta-data-source>
+		<jta-data-source>java:/rcbDS3</jta-data-source>
 		
 		<!-- 
 		Configurações de configuração do banco de dados
@@ -33,18 +33,18 @@
 		
 		O driver será inserido via Maven -->
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_comments" value="true"/> 
 			<property name="hibernate.archive.autodetection" value="class" />
-			<property name="hibernate.connection.autocommit" value="false" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />			
+			<property name="hibernate.connection.autocommit" value="false" />		
 			<property name="hibernate.proc.param_null_passing" value="true" />
-			<property name="hibernate.connection.url" value="192.200.7.35:1521"/>
-			<property name="hibernate.default_schema" value="PRCBE"/>
-			<property name="hibernate.connection.username" value="prcbe"/>
-			<property name="hibernate.connection.password" value="prcbe001"/>
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521/xe"/>
+			<property name="hibernate.default_schema" value="SYSTEM"/>
+			
+			<property name="hibernate.connection.username" value="C##IGORSILVA"/>
+			<property name="hibernate.connection.password" value="123"/>
 		</properties>
 	</persistence-unit>
 </persistence>
