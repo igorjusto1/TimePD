@@ -105,6 +105,25 @@
 					</div>
 
 
+
+					<div class="label">
+						<h:outputLabel for="endereco" value="Endereço:"
+							style="font-weight:bold" />
+
+					</div>
+					<div>
+						<p:selectOneMenu id="e"
+							value="#{pessoaController.newPessoa.endereco}" filter="true"
+							filterMatchMode="contains" converter="enderecoConverter">
+
+							<f:selectItem itemLabel="Selecione um endereço" noSelectionOption="true"/>
+							<f:selectItems value="#{pessoaController.enderecos}"
+								var="endereco" itemLabel="#{endereco.displayName}"
+								itemValue="#{endereco}" />
+						</p:selectOneMenu>
+					</div>
+
+
 					<div class="label">
 						<h:outputLabel for="cpf" value="CPF:" style="font-weight:bold" />
 
@@ -166,11 +185,16 @@
 				<f:facet name="header">Sobrenome</f:facet>
 				<h:outputText value="#{pessoa.sobrenome}" />
 			</p:column>
+			
 			<p:column>
 				<f:facet name="header">Data de Nascimento</f:facet>
 				<h:outputText value="#{pessoa.nascimento}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Endereço</f:facet>
+				<h:outputText value="#{pessoa.endereco.displayName}" />
 			</p:column>
 			<p:column>
 				<f:facet name="header">Ações</f:facet>

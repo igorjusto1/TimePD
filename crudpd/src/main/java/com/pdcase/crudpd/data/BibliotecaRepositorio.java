@@ -18,70 +18,70 @@ import com.pdcase.crudpd.model.Biblioteca;
 
 public class BibliotecaRepositorio {
 	// Gerenciador de acesso ao banco
-		@PersistenceContext
-		EntityManager em;
+	@PersistenceContext(name = "rcb_PU")
+	EntityManager em;
 
-		// Métodos para gerenciamento de transação
-		@Resource
-		UserTransaction ut;
+	// Métodos para gerenciamento de transação
+	@Resource
+	UserTransaction ut;
 
-		public Biblioteca findById(int id) {
-			return em.find(Biblioteca.class, id);
+	public Biblioteca findById(int id) {
+		return em.find(Biblioteca.class, id);
+	}
+
+	public void deleteById(int id) {
+		try {
+			ut.begin();
+		} catch (Exception e) {
+			throw new EJBException();
 		}
 
-		public void deleteById(int id) {
+		em.remove(findById(id));
+
+		try {
+			ut.commit();
+		} catch (Exception e) {
 			try {
-				ut.begin();
-			} catch (Exception e) {
-				throw new EJBException();
-			}
-			
-			em.remove(findById(id));
-			
-			try {
-				ut.commit();
-			} catch (Exception e) {
-				try {
-					this.ut.rollback();
-				} catch (Exception e1) {
-					throw new EJBException(e1);
-				}
+				this.ut.rollback();
+			} catch (Exception e1) {
+				throw new EJBException(e1);
 			}
 		}
+	}
 
-		public void saveOrUpdate(Biblioteca b) {
+	public void saveOrUpdate(Biblioteca b) {
 
-			try {
-				ut.begin();
-			} catch (Exception e) {
-				throw new EJBException();
-			}
-
-			if (b.getId() == 0) {
-				em.persist(b);
-				em.flush();
-			} else {
-				em.merge(b);
-				em.flush();
-			}
-
-			try {
-				ut.commit();
-			} catch (Exception e) {
-				try {
-					this.ut.rollback();
-				} catch (Exception e1) {
-					throw new EJBException(e1);
-				}
-			}
+		try {
+			ut.begin();
+		} catch (Exception e) {
+			throw new EJBException();
 		}
 
-		public List<Biblioteca> getListLivros() {
-
-			CriteriaBuilder cb = em.getCriteriaBuilder();
-			CriteriaQuery<Biblioteca> criteria = cb.createQuery(Biblioteca.class);
-			Root<Biblioteca> b = criteria.from(Biblioteca.class);
-			criteria.select(b).orderBy(cb.asc(b.get("nome_livro")));
-			return em.createQuery(criteria).getResultList();
+		if (b.getId() == 0) {
+			em.persist(b);
+			em.flush();
+		} else {
+			em.merge(b);
+			em.flush();
 		}
+
+		try {
+			ut.commit();
+		} catch (Exception e) {
+			try {
+				this.ut.rollback();
+			} catch (Exception e1) {
+				throw new EJBException(e1);
+			}
+		}
+	}
+
+	public List<Biblioteca> getListLivros() {
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Biblioteca> criteria = cb.createQuery(Biblioteca.class);
+		Root<Biblioteca> b = criteria.from(Biblioteca.class);
+		criteria.select(b).orderBy(cb.asc(b.get("nome_livro")));
+		return em.createQuery(criteria).getResultList();
+	}
 }
