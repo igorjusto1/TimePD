@@ -15,14 +15,14 @@ import com.pdcase.crudpd.service.EstadoService;
 @Named
 @RequestScoped
 public class EstadoController implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private EstadoService estadoService;
-	
+
 	private transient Logger log;
-	
+
 	@Inject
 	private Estado newEstado;
 
@@ -33,43 +33,42 @@ public class EstadoController implements Serializable {
 	public void setNewEstado(Estado newEstado) {
 		this.newEstado = newEstado;
 	}
-	
+
 	@PostConstruct
 	public void initNewEstado() {
 		newEstado = new Estado();
 	}
-	
+
 	public List<Estado> getAllEstados() {
-		return estadoService.getAllEstados();		
+		return estadoService.getAllEstados();
 	}
-	
+
 	public void register() {
 		try {
 			estadoService.register(newEstado);
-			
+
 			initNewEstado();
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
 	}
-	
+
 	public void delete(int id) {
 		try {
 			estadoService.delete(id);
-			
+
 			initNewEstado();
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
 	}
-	
+
 	public void edit(int id) {
 		try {
-			newEstado = estadoService.edit(id);			
+			newEstado = estadoService.edit(id);
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
 	}
-	
 
 }

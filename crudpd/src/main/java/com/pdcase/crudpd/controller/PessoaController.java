@@ -98,17 +98,16 @@ public class PessoaController implements Serializable {
 		refreshList();
 		cleanPessoa();
 	}
-	
-	public void refreshList()
-	{
+
+	public void refreshList() {
 		pessoas = pessoaService.getAllPessoas();
 	}
-	
+
 	public void cleanPessoa() {
 
 		newPessoa = new Pessoa();
 	}
-	
+
 	// Salva o objeto salvo no request
 	public void register() {
 		try {
