@@ -114,7 +114,7 @@ public class PessoaController implements Serializable {
 	}
 
 	public void refreshList() {
-		pessoas = pessoaService.getAllPessoas();
+		pessoas = pessoaService.getAllPessoasViewModel();
 		setEnderecos(pessoaService.getAllCadastro());
 	}
 

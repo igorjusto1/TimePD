@@ -26,8 +26,12 @@ public class PessoaService {
 		log.info("Registering " + pessoa.getNome());
 		pr.saveOrUpdate(pessoa.toPessoa());
 	}
+	
+	public List<Pessoa> getAllPessoas(){
+		return pr.getListPessoas();
+	}
 
-	public List<PessoaViewModel> getAllPessoas(){
+	public List<PessoaViewModel> getAllPessoasViewModel(){
 		return pr.getListPessoas().stream().map(PessoaViewModel::new).collect(Collectors.toList());
 	}
 	
