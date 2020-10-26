@@ -29,23 +29,25 @@
 			<h:outputStylesheet name="css/keila.css" />
 		</h:head>
 
-		<h1>Cadastros de cidades!</h1>
+		<h1>Cadastros de cidades! - WORK IN PROGRESS</h1>
 
 		<fieldset>
 			<h3>Adicionar nova cidade</h3>
 
 			<h:form id="newCidade">
-				<h:inputHidden value="#{cidadeController.newCidade.idCidade}"></h:inputHidden> 
+				<h:inputHidden value="#{cidadeController.newCidade.idCidade}"></h:inputHidden>
 				<div>
 					<label>Nome da Cidade</label>
 					<p:inputText id="nome"
-						value="#{estadoController.newEstado.nomeEstado}" required="true"  maxlength="20" />
+						value="#{cidadeController.newCidade.nomeCidade}" required="true"
+						maxlength="20" />
 				</div>
 				<!-- Aqui vem o drop down dos Estados já cadastrados -->
 				<div>
-					<label>Sigla do Estado</label>
-					<p:inputText id="siglaEstado"
-						value="#{estadoController.newEstado.siglaEstado}" required="true" maxlength="2"></p:inputText>
+					<label>Estado</label>
+					<p:selectOneMenu id="console" value="#{selectOneMenuView.console}">
+						<f:selectItem itemLabel="Aqui vem os Estados"/>
+					</p:selectOneMenu>
 				</div>
 				<p:commandButton action="#{cidadeController.register}"
 					icon="pi pi-save" ajax="false"></p:commandButton>
@@ -60,23 +62,25 @@
 					<f:facet name="header">Nome da Cidade</f:facet>
 					<h:outputText value="#{cidade.nomeCidade}" />
 				</p:column>
-				
+
 				<p:column>
 					<f:facet name="header">Estado</f:facet>
 					<h:outputText value="#{estado.nomeEstado}" />
 				</p:column>
-				
+
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
 					<h:form style="float: left;">
-						<p:commandButton action="#{estadoController.edit(estado.idEstado)}"
+						<p:commandButton
+							action="#{estadoController.edit(estado.idEstado)}"
 							icon="pi pi-refresh" ajax="false" text="Editar">
 						</p:commandButton>
 					</h:form>
 
 					<h:form style="float: left;">
-						<p:commandButton action="#{estadoController.delete(estado.idEstado)}"
+						<p:commandButton
+							action="#{estadoController.delete(estado.idEstado)}"
 							icon="pi pi-minus-circle" ajax="false">
 						</p:commandButton>
 					</h:form>
