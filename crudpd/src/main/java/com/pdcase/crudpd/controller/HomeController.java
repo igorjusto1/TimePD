@@ -37,4 +37,10 @@ public class HomeController implements Serializable {
 	public String cadastroIndex() {
 		return enderecoIndex;
 	}
+	
+	private String cidadeIndex = "cidade/index";
+	
+	public String cidadeIndex() {
+		return cidadeIndex;
+	}
 }

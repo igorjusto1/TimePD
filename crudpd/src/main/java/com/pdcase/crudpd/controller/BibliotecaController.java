@@ -12,7 +12,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.pdcase.crudpd.model.Biblioteca;
+import com.pdcase.crudpd.model.Pessoa;
 import com.pdcase.crudpd.service.BibliotecaService;
+import com.pdcase.crudpd.service.PessoaService;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
 @Named
@@ -26,6 +28,9 @@ public class BibliotecaController implements Serializable{
 	@Inject
 	private BibliotecaService bibliotecaService;
 	
+	@Inject
+	private PessoaService pessoaService;
+	
 	
 	//Logger pra erros
 	private transient Logger log;
@@ -36,6 +41,8 @@ public class BibliotecaController implements Serializable{
 	
 	// Lista de pessoas na view
 	private List<Biblioteca> livros;
+	
+	private List<Pessoa> autor;
 	
 	@Inject
 	private FacesContext facesContext;
@@ -56,11 +63,21 @@ public class BibliotecaController implements Serializable{
 	public void setLivros(List<Biblioteca> livros) {
 		this.livros = livros;
 	}
+	
+	public List<Pessoa> getAutor() {
+		return autor;
+	}
+	
+	public void setAutor(List<Pessoa> autor) {
+		this.autor = autor;
+	}
 
 	@PostConstruct
 	public void initNewLivro() {
 		livros=bibliotecaService.getAllLivros();
 		newLivro = new Biblioteca();
+		autor=pessoaService.getAllPessoas();
+		newLivro.setAutor(new Pessoa());
 	}
 
 	// Salva o objeto salvo no request

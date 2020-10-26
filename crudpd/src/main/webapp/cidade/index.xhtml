@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="content">
+
+		<h:head>
+			<h:outputStylesheet name="css/keila.css" />
+		</h:head>
+
+		<h1>Cadastros de cidades!</h1>
+
+		<fieldset>
+			<h3>Adicionar nova cidade</h3>
+
+			<h:form id="newCidade">
+				<h:inputHidden value="#{cidadeController.newCidade.idCidade}"></h:inputHidden> 
+				<div>
+					<label>Nome da Cidade</label>
+					<p:inputText id="nome"
+						value="#{estadoController.newEstado.nomeEstado}" required="true"  maxlength="20" />
+				</div>
+				<!-- Aqui vem o drop down dos Estados já cadastrados -->
+				<div>
+					<label>Sigla do Estado</label>
+					<p:inputText id="siglaEstado"
+						value="#{estadoController.newEstado.siglaEstado}" required="true" maxlength="2"></p:inputText>
+				</div>
+				<p:commandButton action="#{cidadeController.register}"
+					icon="pi pi-save" ajax="false"></p:commandButton>
+			</h:form>
+		</fieldset>
+
+		<fieldset>
+			<h3>Listagem de Cidades</h3>
+			<h:dataTable var="estado" value="#{cidadeController.getAllCidades()}"
+				styleClass="simpletablestyle" id="tabela">
+				<p:column>
+					<f:facet name="header">Nome da Cidade</f:facet>
+					<h:outputText value="#{cidade.nomeCidade}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Estado</f:facet>
+					<h:outputText value="#{estado.nomeEstado}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Ações</f:facet>
+
+					<h:form style="float: left;">
+						<p:commandButton action="#{estadoController.edit(estado.idEstado)}"
+							icon="pi pi-refresh" ajax="false" text="Editar">
+						</p:commandButton>
+					</h:form>
+
+					<h:form style="float: left;">
+						<p:commandButton action="#{estadoController.delete(estado.idEstado)}"
+							icon="pi pi-minus-circle" ajax="false">
+						</p:commandButton>
+					</h:form>
+				</p:column>
+			</h:dataTable>
+
+		</fieldset>
+
+	</ui:define>
+</ui:composition>
