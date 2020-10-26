@@ -12,7 +12,6 @@ import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
 import com.pdcase.crudpd.model.Cadastro;
-//import com.pdcase.crudpd.model.Pessoa;
 
 // Persistence Context serve pra definir qual configuração de acesso a banco de dados pra usar
 @PersistenceContext(name = "rcb_PU")
