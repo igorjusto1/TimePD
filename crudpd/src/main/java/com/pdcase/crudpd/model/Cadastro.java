@@ -1,8 +1,13 @@
 package com.pdcase.crudpd.model;
 
+<<<<<<< HEAD
 
 import java.io.Serializable;
 import java.util.List;
+=======
+import java.io.Serializable;
+//import java.util.List;
+>>>>>>> e6ee1909c9316b1e32a967bb29ccd98f9e9b6932
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+<<<<<<< HEAD
 
  @Entity
  @Table(name = "CADASTRO_TESTE")
@@ -19,14 +25,34 @@ import javax.persistence.Table;
  public class Cadastro  implements Serializable {
 		private static final long serialVersionUID = 1L;
  @Id
+=======
+@Entity
+@Table(name = "CADASTRO_TESTE")
+
+public class Cadastro implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+>>>>>>> e6ee1909c9316b1e32a967bb29ccd98f9e9b6932
 	@SequenceGenerator(name = "CADASTRO_TESTE_SEQ", sequenceName = "CADASTRO_TESTE_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CADASTRO_TESTE_SEQ")	
 	@Column(name = "id")
 	private int id;
+<<<<<<< HEAD
  
      private String cidade;
      private String bairro;
      private int cep;
+=======
+	
+	private String cidade;
+	private String bairro;
+	private int cep;
+>>>>>>> e6ee1909c9316b1e32a967bb29ccd98f9e9b6932
 	public int getId() {
 		return id;
 	}
@@ -54,6 +80,7 @@ import javax.persistence.Table;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+<<<<<<< HEAD
 	public List<Cadastro> getAllCadastro() {
 		// TODO Auto-generated method stub
 		return null;
@@ -64,3 +91,7 @@ import javax.persistence.Table;
  }
  
   
+=======
+  
+ }
+>>>>>>> e6ee1909c9316b1e32a967bb29ccd98f9e9b6932

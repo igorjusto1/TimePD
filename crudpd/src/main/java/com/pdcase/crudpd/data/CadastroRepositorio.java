@@ -13,10 +13,16 @@ import javax.transaction.UserTransaction;
 
 import com.pdcase.crudpd.model.Cadastro;
 
+<<<<<<< HEAD
 
  // Persistence Context serve pra definir qual configuração de acesso a banco de dados pra usar
  @PersistenceContext(name = "rcb_PU")
  public class CadastroRepositorio {
+=======
+// Persistence Context serve pra definir qual configuração de acesso a banco de dados pra usar
+@PersistenceContext(name = "rcb_PU")
+public class CadastroRepositorio {
+>>>>>>> e6ee1909c9316b1e32a967bb29ccd98f9e9b6932
 	
 	// Gerenciador de acesso ao banco
 	@PersistenceContext
@@ -82,7 +88,14 @@ import com.pdcase.crudpd.model.Cadastro;
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Cadastro> criteria = cb.createQuery(Cadastro.class);
 		Root<Cadastro> p = criteria.from(Cadastro.class);
+<<<<<<< HEAD
 		criteria.select(p).orderBy(cb.asc(p.get("nome")));
 		return em.createQuery(criteria).getResultList();
 	}
 }
+=======
+		criteria.select(p).orderBy(cb.asc(p.get("cidade")));
+		return em.createQuery(criteria).getResultList();
+	}
+}
+>>>>>>> e6ee1909c9316b1e32a967bb29ccd98f9e9b6932
