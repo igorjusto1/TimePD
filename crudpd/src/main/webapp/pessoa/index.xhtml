@@ -116,7 +116,8 @@
 							value="#{pessoaController.newPessoa.endereco}" filter="true"
 							filterMatchMode="contains" converter="enderecoConverter">
 
-							<f:selectItem itemLabel="Selecione um endereço" noSelectionOption="true"/>
+							<f:selectItem itemLabel="Selecione um endereço"
+								noSelectionOption="true" />
 							<f:selectItems value="#{pessoaController.enderecos}"
 								var="endereco" itemLabel="#{endereco.displayName}"
 								itemValue="#{endereco}" />
@@ -185,7 +186,7 @@
 				<f:facet name="header">Sobrenome</f:facet>
 				<h:outputText value="#{pessoa.sobrenome}" />
 			</p:column>
-			
+
 			<p:column>
 				<f:facet name="header">Data de Nascimento</f:facet>
 				<h:outputText value="#{pessoa.nascimento}">
@@ -204,14 +205,18 @@
 							onclick="PF('statusDialog').show();"
 							oncomplete="PF('dlg1').show();PF('statusDialog').hide()"
 							action="#{pessoaController.edit(pessoa.id)}"
-							icon="pi pi-user-edit" update=":newPessoa" />
+							icon="pi pi-user-edit" update=":newPessoa">
+							<p:resetInput target="newPessoa" />
+						</p:commandButton>
 					</h:form>
 
 					<h:form style="float: left;">
+
 						<p:commandButton action="#{pessoaController.delete(pessoa.id)}"
 							update=":tablePessoa" icon="pi pi-user-minus"
 							onclick="PF('statusDialog').show();"
 							oncomplete="PF('statusDialog').hide()">
+							<p:resetInput target="newPessoa" />
 						</p:commandButton>
 					</h:form>
 				</div>
@@ -239,10 +244,13 @@
 
 				<div style="float: left;">
 					<h:form style="float:left;">
+
 						<p:commandButton icon="pi pi-plus" update=":newPessoa"
 							action="#{pessoaController.cleanPessoa}"
 							onclick="PF('statusDialog').show();"
-							oncomplete="PF('dlg1').show();PF('statusDialog').hide();" />
+							oncomplete="PF('dlg1').show();PF('statusDialog').hide();">
+							<p:resetInput target="newPessoa" />
+						</p:commandButton>
 					</h:form>
 
 					<p:commandButton icon="pi pi-file-o" onclick="PF('dlg2').show();" />
