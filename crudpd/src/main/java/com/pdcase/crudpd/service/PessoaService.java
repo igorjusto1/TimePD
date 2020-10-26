@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import com.pdcase.crudpd.data.CadastroRepositorio;
+import com.pdcase.crudpd.data.EnderecoRepositorio;
 import com.pdcase.crudpd.data.PessoaRepositorio;
 import com.pdcase.crudpd.model.Pessoa;
 import com.pdcase.crudpd.viewmodel.CadastroSelectList;
@@ -19,7 +19,7 @@ public class PessoaService {
 	@Inject
 	private PessoaRepositorio pr;
 	@Inject
-	private CadastroRepositorio cr;
+	private EnderecoRepositorio cr;
 
 
 	public void register(PessoaViewModel pessoa) {

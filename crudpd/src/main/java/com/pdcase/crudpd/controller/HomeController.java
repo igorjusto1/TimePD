@@ -32,10 +32,10 @@ public class HomeController implements Serializable {
 		return estadoIndex;
 	}
 	
-	private String cadastroIndex = "cadastro/index";
+	private String enderecoIndex = "endereco/index";
 	
 	public String cadastroIndex() {
-		return cadastroIndex;
+		return enderecoIndex;
 	}
 	
 	private String cidadeIndex = "cidade/index";

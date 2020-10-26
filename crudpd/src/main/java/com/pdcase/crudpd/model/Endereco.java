@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ENDERECO_TESTE")
 
-public class Cadastro implements Serializable {
+public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -71,7 +71,7 @@ public class Cadastro implements Serializable {
 
 
 
-	public List<Cadastro> getAllCadastro() {
+	public List<Endereco> getAllCadastro() {
 		// TODO Auto-generated method stub
 		return null;
 	}

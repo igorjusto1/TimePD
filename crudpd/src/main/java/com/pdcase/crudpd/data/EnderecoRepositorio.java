@@ -11,11 +11,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-import com.pdcase.crudpd.model.Cadastro;
+import com.pdcase.crudpd.model.Endereco;
 
 // Persistence Context serve pra definir qual configuração de acesso a banco de dados pra usar
 @PersistenceContext(name = "rcb_PU")
-public class CadastroRepositorio {
+public class EnderecoRepositorio {
 
 	// Gerenciador de acesso ao banco
 	@PersistenceContext(name = "rcb_PU")
@@ -25,8 +25,8 @@ public class CadastroRepositorio {
 	@Resource
 	UserTransaction ut;
 
-	public Cadastro findById(int id) {
-		return em.find(Cadastro.class, id);
+	public Endereco findById(int id) {
+		return em.find(Endereco.class, id);
 	}
 
 	public void deleteById(int id) {
@@ -49,7 +49,7 @@ public class CadastroRepositorio {
 		}
 	}
 
-	public void saveOrUpdate(Cadastro p) {
+	public void saveOrUpdate(Endereco p) {
 
 		try {
 			ut.begin();
@@ -76,11 +76,11 @@ public class CadastroRepositorio {
 		}
 	}
 
-	public List<Cadastro> getListCadastro() {
+	public List<Endereco> getListCadastro() {
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Cadastro> criteria = cb.createQuery(Cadastro.class);
-		Root<Cadastro> p = criteria.from(Cadastro.class);
+		CriteriaQuery<Endereco> criteria = cb.createQuery(Endereco.class);
+		Root<Endereco> p = criteria.from(Endereco.class);
 		criteria.select(p).orderBy(cb.asc(p.get("cidade")));
 		return em.createQuery(criteria).getResultList();
 	}

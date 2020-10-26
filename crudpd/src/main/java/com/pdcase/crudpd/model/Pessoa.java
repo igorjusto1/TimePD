@@ -42,7 +42,7 @@ public class Pessoa implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_endereco")
-	private Cadastro endereco;
+	private Endereco endereco;
 
 	public int getId() {
 		return id;
@@ -84,11 +84,11 @@ public class Pessoa implements Serializable {
 		this.nascimento = nascimento;
 	}
 
-	public Cadastro getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Cadastro endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 
