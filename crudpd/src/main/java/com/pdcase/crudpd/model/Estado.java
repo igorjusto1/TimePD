@@ -16,11 +16,11 @@ public class Estado implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final String sequence = "ESTADO_TESTE_SEQ";
+	private static final String SEQUENCE = "ESTADO_TESTE_SEQ";
 	
 	@Id
-	@SequenceGenerator(name = sequence, sequenceName = sequence, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = sequence)
+	@SequenceGenerator(name = SEQUENCE, sequenceName = SEQUENCE, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
 	
 	/* TODOS OS CAMPOS SÃO NOT NULL */
 

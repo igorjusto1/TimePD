@@ -24,12 +24,9 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
-import com.pdcase.crudpd.model.Endereco;
-import com.pdcase.crudpd.model.Pessoa;
-import com.pdcase.crudpd.service.EnderecoService;
 import com.pdcase.crudpd.service.PessoaService;
 import com.pdcase.crudpd.util.CpfConverter;
-import com.pdcase.crudpd.viewmodel.CadastroSelectList;
+import com.pdcase.crudpd.viewmodel.EnderecoSelectList;
 import com.pdcase.crudpd.viewmodel.PessoaViewModel;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
@@ -38,9 +35,6 @@ import com.pdcase.crudpd.viewmodel.PessoaViewModel;
 @RequestScoped
 public class PessoaController implements Serializable {
 
-	/**
-	* 
-	*/
 	private static final long serialVersionUID = 1L;
 
 	// Camada de service
@@ -56,7 +50,7 @@ public class PessoaController implements Serializable {
 	private List<PessoaViewModel> pessoas;
 
 	// Lista de enderecos para cadastro
-	private List<CadastroSelectList> enderecos;
+	private List<EnderecoSelectList> enderecos;
 
 	// File para upload csv
 	private UploadedFile fileUpload;
@@ -99,11 +93,11 @@ public class PessoaController implements Serializable {
 		this.fileDownload = fileDownload;
 	}
 
-	public List<CadastroSelectList> getEnderecos() {
+	public List<EnderecoSelectList> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(List<CadastroSelectList> enderecos) {
+	public void setEnderecos(List<EnderecoSelectList> enderecos) {
 		this.enderecos = enderecos;
 	}
 
@@ -192,6 +186,9 @@ public class PessoaController implements Serializable {
 					newPessoa.setNome(spli[0]);
 					newPessoa.setSobrenome(spli[1]);
 					newPessoa.setNascimento(convertParaDateTime(i, spli[3]));
+					EnderecoSelectList e = new EnderecoSelectList();
+					e.setId(Integer.parseInt(spli[4]));
+					newPessoa.setEndereco(e);
 					i++;
 
 					pessoaService.register(newPessoa);
@@ -210,7 +207,7 @@ public class PessoaController implements Serializable {
 	}
 
 	public void download() {
-		StringBuilder linhas = new StringBuilder("Id;Nome;Sobrenome;Cpf;Data de Nascimento");
+		StringBuilder linhas = new StringBuilder("Id;Nome;Sobrenome;Cpf;Data de Nascimento;\r\n");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		for (PessoaViewModel p : pessoas) {
 			StringBuilder linha = new StringBuilder();

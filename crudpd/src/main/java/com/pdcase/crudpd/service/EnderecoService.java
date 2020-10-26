@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import com.pdcase.crudpd.data.EnderecoRepositorio;
 import com.pdcase.crudpd.model.Endereco;
-import com.pdcase.crudpd.viewmodel.CadastroSelectList;
+import com.pdcase.crudpd.viewmodel.EnderecoSelectList;
 
 public class EnderecoService {
 	@Inject
@@ -35,8 +35,8 @@ public class EnderecoService {
 		return pr.findById(id);
 	}
 
-	public CadastroSelectList find(int id) {
-		return new CadastroSelectList(pr.findById(id));
+	public EnderecoSelectList find(int id) {
+		return new EnderecoSelectList(pr.findById(id));
 	}
 
 	public void delete(int id) {

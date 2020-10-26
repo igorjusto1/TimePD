@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import com.pdcase.crudpd.data.EnderecoRepositorio;
 import com.pdcase.crudpd.data.PessoaRepositorio;
 import com.pdcase.crudpd.model.Pessoa;
-import com.pdcase.crudpd.viewmodel.CadastroSelectList;
+import com.pdcase.crudpd.viewmodel.EnderecoSelectList;
 import com.pdcase.crudpd.viewmodel.PessoaViewModel;
 
 public class PessoaService {
@@ -35,9 +35,9 @@ public class PessoaService {
 		return pr.getListPessoas().stream().map(PessoaViewModel::new).collect(Collectors.toList());
 	}
 	
-	public List<CadastroSelectList> getAllCadastro(){
+	public List<EnderecoSelectList> getAllCadastro(){
 
-		return cr.getListCadastro().stream().map(CadastroSelectList::new).collect(Collectors.toList());
+		return cr.getListCadastro().stream().map(EnderecoSelectList::new).collect(Collectors.toList());
 	}
 	
 	public PessoaViewModel edit(int id) {

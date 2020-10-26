@@ -1,8 +1,14 @@
 package com.pdcase.crudpd.viewmodel;
 
+import java.io.Serializable;
+
 import com.pdcase.crudpd.model.Endereco;
 
-public class CadastroSelectList {
+public class EnderecoSelectList implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String displayName;
 
@@ -22,11 +28,11 @@ public class CadastroSelectList {
 		this.displayName = displayName;
 	}
 
-	public CadastroSelectList() {
+	public EnderecoSelectList() {
 		// default
 	}
 
-	public CadastroSelectList(Endereco c) {
+	public EnderecoSelectList(Endereco c) {
 		if (c != null) {
 			this.id = c.getId();
 			this.displayName = c.toString();
@@ -40,14 +46,14 @@ public class CadastroSelectList {
 	}
 	
 
-    public CadastroSelectList(int id) {
+    public EnderecoSelectList(int id) {
 		this.id = id;
 	}
 
 	@Override
     public boolean equals(Object other) {
         return (other != null && getClass() == other.getClass())
-            ? this.id == (((CadastroSelectList) other).id)
+            ? this.id == (((EnderecoSelectList) other).id)
             : (other == this);
     }
 
