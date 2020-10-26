@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import com.pdcase.crudpd.data.CadastroRepositorio;
 import com.pdcase.crudpd.model.Cadastro;
+import com.pdcase.crudpd.viewmodel.CadastroSelectList;
 
 public class CadastroService {
 	@Inject
@@ -31,6 +32,10 @@ public class CadastroService {
 	}
 	public Cadastro edit(int id) {
 		return pr.findById(id);
+	}
+	
+	public CadastroSelectList find(int id) {
+		return new CadastroSelectList( pr.findById(id));
 	}
 
 	public void delete(int id) {

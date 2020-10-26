@@ -2,12 +2,15 @@ package com.pdcase.crudpd.service;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import com.pdcase.crudpd.data.CadastroRepositorio;
 import com.pdcase.crudpd.data.PessoaRepositorio;
 import com.pdcase.crudpd.model.Pessoa;
+import com.pdcase.crudpd.viewmodel.CadastroSelectList;
+import com.pdcase.crudpd.viewmodel.PessoaViewModel;
 
 public class PessoaService {
 	@Inject
@@ -15,22 +18,26 @@ public class PessoaService {
 
 	@Inject
 	private PessoaRepositorio pr;
-
 	@Inject
-	private Event<Pessoa> pessoaEventSrc;
+	private CadastroRepositorio cr;
 
-	public void register(Pessoa pessoa) {
+
+	public void register(PessoaViewModel pessoa) {
 		log.info("Registering " + pessoa.getNome());
-		pr.saveOrUpdate(pessoa);
-		pessoaEventSrc.fire(pessoa);
+		pr.saveOrUpdate(pessoa.toPessoa());
 	}
 
-	public List<Pessoa> getAllPessoas(){
-
-		return pr.getListPessoas();
+	public List<PessoaViewModel> getAllPessoas(){
+		return pr.getListPessoas().stream().map(PessoaViewModel::new).collect(Collectors.toList());
 	}
-	public Pessoa edit(int id) {
-		return pr.findById(id);
+	
+	public List<CadastroSelectList> getAllCadastro(){
+
+		return cr.getListCadastro().stream().map(CadastroSelectList::new).collect(Collectors.toList());
+	}
+	
+	public PessoaViewModel edit(int id) {
+		return new PessoaViewModel(pr.findById(id));
 	}
 
 	public void delete(int id) {
@@ -40,7 +47,6 @@ public class PessoaService {
 
 		pr.deleteById(id);
 
-		pessoaEventSrc.fire(pessoa);
 
 	}
 }

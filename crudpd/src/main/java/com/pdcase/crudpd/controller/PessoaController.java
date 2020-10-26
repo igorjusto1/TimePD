@@ -24,9 +24,13 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
+import com.pdcase.crudpd.model.Cadastro;
 import com.pdcase.crudpd.model.Pessoa;
+import com.pdcase.crudpd.service.CadastroService;
 import com.pdcase.crudpd.service.PessoaService;
 import com.pdcase.crudpd.util.CpfConverter;
+import com.pdcase.crudpd.viewmodel.CadastroSelectList;
+import com.pdcase.crudpd.viewmodel.PessoaViewModel;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
 @Named
@@ -42,15 +46,17 @@ public class PessoaController implements Serializable {
 	// Camada de service
 	@Inject
 	private PessoaService pessoaService;
-
 	// Logger pra erros
 	private transient Logger log;
 
 	// Modelo utilizado durante os requests
-	private Pessoa newPessoa;
+	private PessoaViewModel newPessoa;
 
 	// Lista de pessoas na view
-	private List<Pessoa> pessoas;
+	private List<PessoaViewModel> pessoas;
+	
+	// Lista de enderecos para cadastro
+	private List<CadastroSelectList> enderecos;
 
 	// File para upload csv
 	private UploadedFile fileUpload;
@@ -61,19 +67,19 @@ public class PessoaController implements Serializable {
 	@Inject
 	private FacesContext facesContext;
 
-	public Pessoa getNewPessoa() {
+	public PessoaViewModel getNewPessoa() {
 		return newPessoa;
 	}
 
-	public void setNewPessoa(Pessoa newPessoa) {
+	public void setNewPessoa(PessoaViewModel newPessoa) {
 		this.newPessoa = newPessoa;
 	}
 
-	public List<Pessoa> getPessoas() {
+	public List<PessoaViewModel> getPessoas() {
 		return pessoas;
 	}
 
-	public void setPessoas(List<Pessoa> pessoas) {
+	public void setPessoas(List<PessoaViewModel> pessoas) {
 		this.pessoas = pessoas;
 	}
 
@@ -93,22 +99,29 @@ public class PessoaController implements Serializable {
 		this.fileDownload = fileDownload;
 	}
 
+	public List<CadastroSelectList> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<CadastroSelectList> enderecos) {
+		this.enderecos = enderecos;
+	}
+
 	@PostConstruct
 	public void init() {
 		refreshList();
 		cleanPessoa();
 	}
-	
-	public void refreshList()
-	{
-		pessoas = pessoaService.getAllPessoas();
-	}
-	
-	public void cleanPessoa() {
 
-		newPessoa = new Pessoa();
+	public void refreshList() {
+		pessoas = pessoaService.getAllPessoas();
+		setEnderecos(pessoaService.getAllCadastro());
 	}
-	
+
+	public void cleanPessoa() {
+		newPessoa = new PessoaViewModel();
+	}
+
 	// Salva o objeto salvo no request
 	public void register() {
 		try {
@@ -174,7 +187,7 @@ public class PessoaController implements Serializable {
 
 					String cpf = spli[2].replace("-", "");
 					cpf = cpf.replace(".", "");
-					newPessoa = new Pessoa();
+					newPessoa = new PessoaViewModel();
 					newPessoa.setCpf(cpf);
 					newPessoa.setNome(spli[0]);
 					newPessoa.setSobrenome(spli[1]);
@@ -199,7 +212,7 @@ public class PessoaController implements Serializable {
 	public void download() {
 		StringBuilder linhas = new StringBuilder("Id;Nome;Sobrenome;Cpf;Data de Nascimento");
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		for (Pessoa p : pessoas) {
+		for (PessoaViewModel p : pessoas) {
 			StringBuilder linha = new StringBuilder();
 
 			linha.append(p.getId());
@@ -259,3 +272,5 @@ public class PessoaController implements Serializable {
 		return errorMessage;
 	}
 }
+
+

@@ -16,7 +16,7 @@ import com.pdcase.crudpd.model.Estado;
 @PersistenceContext(name = "rcb_PU")
 
 public class EstadoRepositorio {
-	@PersistenceContext
+	@PersistenceContext(name = "rcb_PU")
 	EntityManager em;
 
 	@Resource

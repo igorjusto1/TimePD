@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -36,6 +39,10 @@ public class Pessoa implements Serializable {
 
 	@Column(name = "nascimento")
 	private Date nascimento;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_endereco")
+	private Cadastro endereco;
 
 	public int getId() {
 		return id;
@@ -75,6 +82,14 @@ public class Pessoa implements Serializable {
 
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
+	}
+
+	public Cadastro getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Cadastro endereco) {
+		this.endereco = endereco;
 	}
 
 }

@@ -18,7 +18,7 @@ import com.pdcase.crudpd.model.Cadastro;
 public class CadastroRepositorio {
 	
 	// Gerenciador de acesso ao banco
-	@PersistenceContext
+	@PersistenceContext(name = "rcb_PU")
 	EntityManager em;
 
 	// Métodos para gerenciamento de transação

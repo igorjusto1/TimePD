@@ -27,6 +27,8 @@ import org.jboss.arquillian.junit.Arquillian;
 import com.pdcase.crudpd.model.Pessoa;
 import com.pdcase.crudpd.service.PessoaService;
 import com.pdcase.crudpd.util.Resources;
+import com.pdcase.crudpd.viewmodel.PessoaViewModel;
+
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -58,7 +60,8 @@ public class PessoaRegistrationTest {
         newPessoa.setNome("Jane");
         newPessoa.setSobrenome("Doe");
         newPessoa.setCpf("2125551234");
-        pessoaService.register(newPessoa);
+        
+        pessoaService.register(new PessoaViewModel(newPessoa));
         assertNotNull(newPessoa.getId());
         log.info(newPessoa.getNome() + " was persisted with id " + newPessoa.getId());
     }
