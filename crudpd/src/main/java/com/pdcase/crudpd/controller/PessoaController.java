@@ -24,9 +24,9 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
-import com.pdcase.crudpd.model.Cadastro;
+import com.pdcase.crudpd.model.Endereco;
 import com.pdcase.crudpd.model.Pessoa;
-import com.pdcase.crudpd.service.CadastroService;
+import com.pdcase.crudpd.service.EnderecoService;
 import com.pdcase.crudpd.service.PessoaService;
 import com.pdcase.crudpd.util.CpfConverter;
 import com.pdcase.crudpd.viewmodel.CadastroSelectList;
@@ -114,7 +114,7 @@ public class PessoaController implements Serializable {
 	}
 
 	public void refreshList() {
-		pessoas = pessoaService.getAllPessoas();
+		pessoas = pessoaService.getAllPessoasViewModel();
 		setEnderecos(pessoaService.getAllCadastro());
 	}
 

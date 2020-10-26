@@ -1,6 +1,6 @@
 package com.pdcase.crudpd.viewmodel;
 
-import com.pdcase.crudpd.model.Cadastro;
+import com.pdcase.crudpd.model.Endereco;
 
 public class CadastroSelectList {
 	private int id;
@@ -26,7 +26,7 @@ public class CadastroSelectList {
 		// default
 	}
 
-	public CadastroSelectList(Cadastro c) {
+	public CadastroSelectList(Endereco c) {
 		if (c != null) {
 			this.id = c.getId();
 			this.displayName = c.toString();
@@ -56,8 +56,8 @@ public class CadastroSelectList {
        return this.id;
     }
 
-	public Cadastro toEndereco() {
-		Cadastro c = new Cadastro();
+	public Endereco toEndereco() {
+		Endereco c = new Endereco();
 		c.setId(this.id);
 
 		return c;

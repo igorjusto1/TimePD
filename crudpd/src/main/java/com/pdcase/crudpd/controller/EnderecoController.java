@@ -9,14 +9,14 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.pdcase.crudpd.model.Cadastro;
-import com.pdcase.crudpd.service.CadastroService;
+import com.pdcase.crudpd.model.Endereco;
+import com.pdcase.crudpd.service.EnderecoService;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
 @Named
 // Escopo das variáveis do controlador.
 @RequestScoped
-public class CadastroController implements Serializable {
+public class EnderecoController implements Serializable {
 
 	/**
 	* 
@@ -25,7 +25,7 @@ public class CadastroController implements Serializable {
 
 	// Camada de service
 	@Inject
-	private CadastroService cadastroService;
+	private EnderecoService cadastroService;
 	
 	
 	//Logger pra erros
@@ -33,22 +33,22 @@ public class CadastroController implements Serializable {
 
 	// Modelo utilizado durante os requests
 	@Inject
-	private Cadastro newCadastro;
+	private Endereco newCadastro;
 
-	public Cadastro getNewCadastro() {
+	public Endereco getNewCadastro() {
 		return newCadastro;
 	}
 
-	public void setNewCadasrtro(Cadastro newCadastro) {
+	public void setNewCadasrtro(Endereco newCadastro) {
 		this.newCadastro = newCadastro;
 	}
 
 	@PostConstruct
 	public void initNewCadastro() {
-		newCadastro = new Cadastro();
+		newCadastro = new Endereco();
 	}
 
-	public List<Cadastro> getAllCadastro() {
+	public List<Endereco> getAllCadastro() {
 		return cadastroService.getAllCadastro();
 	}
 
