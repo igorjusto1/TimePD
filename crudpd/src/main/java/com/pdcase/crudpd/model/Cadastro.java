@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "ENDERECO_TESTE")
 
 public class Cadastro implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -63,9 +64,11 @@ public class Cadastro implements Serializable {
 		return serialVersionUID;
 	}
 
+
 	public String toString() {
 		return this.cidade + ", " + this.bairro + ", " + this.cep;
 	}
+
 
 
 	public List<Cadastro> getAllCadastro() {

@@ -9,45 +9,43 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.pdcase.crudpd.model.Estado;
-import com.pdcase.crudpd.service.EstadoService;
+import com.pdcase.crudpd.model.Cidade;
+import com.pdcase.crudpd.service.CidadeService;
 
 @Named
 @RequestScoped
-public class EstadoController implements Serializable {
+public class CidadeController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private EstadoService estadoService;
+	private CidadeService cidadeService;
 
 	private transient Logger log;
 
 	@Inject
-	private Estado newEstado;
+	private Cidade newCidade;
 
-	public Estado getNewEstado() {
-		return newEstado;
+	public Cidade getNewCidade() {
+		return newCidade;
 	}
 
-	public void setNewEstado(Estado newEstado) {
-		this.newEstado = newEstado;
+	public void setNewCidade(Cidade newCidade) {
+		this.newCidade = newCidade;
 	}
 
 	@PostConstruct
-	public void initNewEstado() {
-		newEstado = new Estado();
+	public void initNewCidade() {
+		newCidade = new Cidade();
 	}
 
-	public List<Estado> getAllEstados() {
-		return estadoService.getAllEstados();
+	public List<Cidade> getAllCidades() {
+		return cidadeService.getAllCidades();
 	}
 
 	public void register() {
 		try {
-			estadoService.register(newEstado);
-
-			initNewEstado();
+			cidadeService.register(newCidade);
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
@@ -55,9 +53,9 @@ public class EstadoController implements Serializable {
 
 	public void delete(int id) {
 		try {
-			estadoService.delete(id);
+			cidadeService.delete(id);
 
-			initNewEstado();
+			initNewCidade();
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
@@ -65,7 +63,7 @@ public class EstadoController implements Serializable {
 
 	public void edit(int id) {
 		try {
-			newEstado = estadoService.edit(id);
+			newCidade = cidadeService.edit(id);
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}

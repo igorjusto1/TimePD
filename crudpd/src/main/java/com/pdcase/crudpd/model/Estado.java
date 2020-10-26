@@ -14,11 +14,13 @@ import javax.persistence.Table;
 @Table(name="estado_teste")
 public class Estado implements Serializable {
 	
-	private static final long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
+	
+	private static final String sequence = "ESTADO_TESTE_SEQ";
 	
 	@Id
-	@SequenceGenerator(name = "TB_ESTADO_TESTE_SEQ", sequenceName = "TB_ESTADO_TESTE_SEQ", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_ESTADO_TESTE_SEQ")
+	@SequenceGenerator(name = sequence, sequenceName = sequence, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = sequence)
 	
 	/* TODOS OS CAMPOS SÃO NOT NULL */
 

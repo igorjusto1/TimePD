@@ -11,22 +11,19 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
 
-import com.pdcase.crudpd.model.Cadastro;
+import com.pdcase.crudpd.model.Cidade;
 
-// Persistence Context serve pra definir qual configuração de acesso a banco de dados pra usar
 @PersistenceContext(name = "rcb_PU")
-public class CadastroRepositorio {
 
-	// Gerenciador de acesso ao banco
-	@PersistenceContext(name = "rcb_PU")
+public class CidadeRepositorio {
+	@PersistenceContext
 	EntityManager em;
 
-	// Métodos para gerenciamento de transação
 	@Resource
 	UserTransaction ut;
 
-	public Cadastro findById(int id) {
-		return em.find(Cadastro.class, id);
+	public Cidade findById(int id) {
+		return em.find(Cidade.class, id);
 	}
 
 	public void deleteById(int id) {
@@ -44,44 +41,45 @@ public class CadastroRepositorio {
 			try {
 				this.ut.rollback();
 			} catch (Exception e1) {
-				throw new EJBException(e1);
+				throw new EJBException();
+
 			}
 		}
 	}
 
-	public void saveOrUpdate(Cadastro p) {
-
+	public void saveOrUpdate(Cidade c) {
 		try {
 			ut.begin();
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			throw new EJBException();
 		}
 
-		if (p.getId() == 0) {
-			em.persist(p);
+		if (c.getIdCidade() == 0) {
+			em.persist(c);
 			em.flush();
 		} else {
-			em.merge(p);
+			em.merge(c);
 			em.flush();
 		}
 
 		try {
 			ut.commit();
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			try {
 				this.ut.rollback();
 			} catch (Exception e1) {
-				throw new EJBException(e1);
+				throw new EJBException();
 			}
 		}
 	}
 
-	public List<Cadastro> getListCadastro() {
-
+	public List<Cidade> getListCidades() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Cadastro> criteria = cb.createQuery(Cadastro.class);
-		Root<Cadastro> p = criteria.from(Cadastro.class);
-		criteria.select(p).orderBy(cb.asc(p.get("cidade")));
+		CriteriaQuery<Cidade> criteria = cb.createQuery(Cidade.class);
+		Root<Cidade> e = criteria.from(Cidade.class);
+		criteria.select(e).orderBy(cb.asc(e.get("nomeCidade")));
+
 		return em.createQuery(criteria).getResultList();
 	}
+
 }

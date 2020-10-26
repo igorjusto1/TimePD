@@ -54,7 +54,7 @@ public class PessoaController implements Serializable {
 
 	// Lista de pessoas na view
 	private List<PessoaViewModel> pessoas;
-	
+
 	// Lista de enderecos para cadastro
 	private List<CadastroSelectList> enderecos;
 
@@ -272,5 +272,3 @@ public class PessoaController implements Serializable {
 		return errorMessage;
 	}
 }
-
-
