@@ -26,16 +26,17 @@ public class CadastroService {
 		cadastroEventSrc.fire(cadastro);
 	}
 
-	public List<Cadastro> getAllCadastro(){
+	public List<Cadastro> getAllCadastro() {
 
 		return pr.getListCadastro();
 	}
+
 	public Cadastro edit(int id) {
 		return pr.findById(id);
 	}
-	
+
 	public CadastroSelectList find(int id) {
-		return new CadastroSelectList( pr.findById(id));
+		return new CadastroSelectList(pr.findById(id));
 	}
 
 	public void delete(int id) {
@@ -45,7 +46,7 @@ public class CadastroService {
 
 		pr.deleteById(id);
 
-	    cadastroEventSrc.fire(cadastro);
+		cadastroEventSrc.fire(cadastro);
 
 	}
 }

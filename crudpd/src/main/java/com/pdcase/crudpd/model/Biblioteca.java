@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +23,7 @@ public class Biblioteca implements Serializable {
 	@Id
 	@SequenceGenerator(name = "BIBLIOTECA_TESTE_SEQ", sequenceName = "BIBLIOTECA_TESTE_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BIBLIOTECA_TESTE_SEQ")	
+	
 	@Column(name = "id")
 	private int id;
 
@@ -34,9 +38,10 @@ public class Biblioteca implements Serializable {
 	
 	@Column(name = "paginas")
 	private String paginas;
-	
-	@Column(name = "nome_autor")
-	private String nome_autor;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_autor")
+	private Pessoa autor;
 	
 	@Column(name = "descricao")
 	private String descricao;
@@ -50,12 +55,12 @@ public class Biblioteca implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome_autor() {
-		return nome_autor;
+	public Pessoa getAutor() {
+		return autor;
 	}
 	
-	public void setNome_autor(String nome_autor) {
-		this.nome_autor = nome_autor;
+	public void setAutor(Pessoa autor) {
+		this.autor = autor;
 	}
 	
 	public String getNome_livro() {

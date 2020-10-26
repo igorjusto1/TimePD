@@ -54,7 +54,7 @@ public class PessoaController implements Serializable {
 
 	// Lista de pessoas na view
 	private List<PessoaViewModel> pessoas;
-	
+
 	// Lista de enderecos para cadastro
 	private List<CadastroSelectList> enderecos;
 
@@ -114,7 +114,7 @@ public class PessoaController implements Serializable {
 	}
 
 	public void refreshList() {
-		pessoas = pessoaService.getAllPessoas();
+		pessoas = pessoaService.getAllPessoasViewModel();
 		setEnderecos(pessoaService.getAllCadastro());
 	}
 
@@ -272,5 +272,3 @@ public class PessoaController implements Serializable {
 		return errorMessage;
 	}
 }
-
-
