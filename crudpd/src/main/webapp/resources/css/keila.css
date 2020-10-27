@@ -58,3 +58,47 @@ label {
 	justify-content: space-between;
 	width:68px;
 }
+
+.cadastro {
+	display: flex;
+	flex-direction: column;
+}
+
+.camposcadastro {
+	margin-top:20px;
+}
+
+body .ui-messages .ui-messages-error {
+	color:white !important;
+	background-color: grey !important;
+}
+
+body .ui-message.ui-message-error {
+	color:white !important;
+	background-color: grey !important;
+}
+
+body .ui-growl .ui-growl-item-container.ui-growl-error {
+	color: white !important;
+    background-color: grey !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+body .ui-growl .ui-growl-item-container .ui-growl-item {
+    color: black !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+
+body .ui-messages .ui-messages-info {
+	color: black !important;
+	background-color: #b7d8b7 !important;
+	border:initial;
+
+}
+
+.ui-selectonemenu .ui-selectonemenu-label {
+	color:white !important;
+}
