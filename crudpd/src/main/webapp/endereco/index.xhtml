@@ -36,31 +36,31 @@
 			
 			<h:graphicImage value="/resources/gfx/livro.jpg" />
 			
-			<h:form id="newCadastro">
-				<h:inputHidden value="#{cadastroController.newCadastro.id}">
+			<h:form id="newEndereco">
+				<h:inputHidden value="#{enderecoController.newEndereco.id}">
 				</h:inputHidden>
 				
 				<div>
 					<label>CIDADE:</label>
 					<h:inputText id="cidade"
-						value="#{cadastroController.newCadastro.cidade}" />
+						value="#{enderecoController.newEndereco.cidade}" />
 				</div>
 				
 				<div>
 					<label>BAIRRO:</label>
 					<h:inputText id="bairro"
-						value="#{cadastroController.newCadastro.bairro}">
+						value="#{enderecoController.newEndereco.bairro}">
 					</h:inputText>
 				</div>
 				
 				<div>
 					<label>CEP:</label>
 					<h:inputText id="cep"
-						value="#{cadastroController.newCadastro.cep}">
+						value="#{enderecoController.newEndereco.cep}">
 					</h:inputText>
 				</div>
 				
-				<h:commandButton action="#{cadastroController.register}"
+				<h:commandButton action="#{enderecoController.register}"
 					value="Salvar">
 				</h:commandButton>
 			</h:form>
@@ -68,23 +68,23 @@
 
 		<fieldset style="margin: auto">
 			<legend>ARMAZENAMENTO DE DADOS</legend>
-			<h:dataTable var="cadastro"
-				value="#{cadastroController.getAllCadastro()}"
+			<h:dataTable var="endereco"
+				value="#{enderecoController.getAllEndereco()}"
 				styleClass="simpletablestyle">
 				
 				<h:column>
 					<f:facet name="header">CIDADE</f:facet>
-					<h:outputText value="#{cadastro.cidade}" />
+					<h:outputText value="#{endereco.cidade}" />
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">BAIRRO</f:facet>
-					<h:outputText value="#{cadastro.bairro}" />
+					<h:outputText value="#{endereco.bairro}" />
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">CEP</f:facet>
-					<h:outputText value="#{cadastro.cep}" />
+					<h:outputText value="#{endereco.cep}" />
 				</h:column>
 				
 
@@ -93,13 +93,13 @@
 					<f:facet name="header">Ações</f:facet>
 
 					<h:form>
-						<h:commandButton action="#{cadastroController.edit(cadastro.id)}"
+						<h:commandButton action="#{enderecoController.edit(endereco.id)}"
 							value="Editar">
 						</h:commandButton>
 					</h:form>
 
 					<h:form>
-						<h:commandButton action="#{cadastroController.delete(cadastro.id)}"
+						<h:commandButton action="#{enderecoController.delete(endereco.id)}"
 							value="Delete">
 						</h:commandButton>
 					</h:form>

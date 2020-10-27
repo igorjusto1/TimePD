@@ -18,17 +18,17 @@ public class EnderecoService {
 	private EnderecoRepositorio pr;
 
 	@Inject
-	private Event<Endereco> cadastroEventSrc;
+	private Event<Endereco> enderecoEventSrc;
 
-	public void register(Endereco cadastro) {
-		log.info("Registering " + cadastro.getCidade());
-		pr.saveOrUpdate(cadastro);
-		cadastroEventSrc.fire(cadastro);
+	public void register(Endereco endereco) {
+		log.info("Registering " + endereco.getCidade());
+		pr.saveOrUpdate(endereco);
+		enderecoEventSrc.fire(endereco);
 	}
 
-	public List<Endereco> getAllCadastro() {
+	public List<Endereco> getAllEndereco() {
 
-		return pr.getListCadastro();
+		return pr.getListEndereco();
 	}
 
 	public Endereco edit(int id) {
@@ -40,13 +40,13 @@ public class EnderecoService {
 	}
 
 	public void delete(int id) {
-		Endereco cadastro = pr.findById(id);
+		Endereco endereco = pr.findById(id);
 
-		log.info("Apagando " + cadastro.getCidade());
+		log.info("Apagando " + endereco.getCidade());
 
 		pr.deleteById(id);
 
-		cadastroEventSrc.fire(cadastro);
+		enderecoEventSrc.fire(endereco);
 
 	}
 }

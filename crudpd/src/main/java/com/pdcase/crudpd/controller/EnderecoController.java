@@ -25,39 +25,40 @@ public class EnderecoController implements Serializable {
 
 	// Camada de service
 	@Inject
-	private EnderecoService cadastroService;
+	private EnderecoService enderecoService;
 	
 	
 	//Logger pra erros
-	private transient Logger log;
+	@Inject
+	private Logger log;
 
 	// Modelo utilizado durante os requests
 	@Inject
-	private Endereco newCadastro;
+	private Endereco newEndereco;
 
-	public Endereco getNewCadastro() {
-		return newCadastro;
+	public Endereco getNewEndereco() {
+		return newEndereco;
 	}
 
-	public void setNewCadasrtro(Endereco newCadastro) {
-		this.newCadastro = newCadastro;
+	public void setNewEndereco(Endereco newEndereco) {
+		this.newEndereco = newEndereco;
 	}
 
 	@PostConstruct
-	public void initNewCadastro() {
-		newCadastro = new Endereco();
+	public void initNewEndereco() {
+		newEndereco = new Endereco();
 	}
 
-	public List<Endereco> getAllCadastro() {
-		return cadastroService.getAllCadastro();
+	public List<Endereco> getAllEndereco() {
+		return enderecoService.getAllEndereco();
 	}
 
 	// Salva o objeto salvo no request
 	public void register() {
 		try {
-			cadastroService.register(newCadastro);
+			enderecoService.register(newEndereco);
 
-			initNewCadastro();
+			initNewEndereco();
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
@@ -66,9 +67,9 @@ public class EnderecoController implements Serializable {
 	// Apaga o objeto passado por id no request
 	public void delete(int id) {
 		try {
-			cadastroService.delete(id);
+			enderecoService.delete(id);
 
-			initNewCadastro();
+			initNewEndereco();
 		} catch (Exception e) {
 
 			log.info(e.getMessage());
@@ -78,7 +79,7 @@ public class EnderecoController implements Serializable {
 	// Carrega o objeto passado por id para edição
 	public void edit(int id) {
 		try {
-			newCadastro = cadastroService.edit(id);
+			newEndereco = enderecoService.edit(id);
 
 		} catch (Exception e) {
 			log.info(e.getMessage());
