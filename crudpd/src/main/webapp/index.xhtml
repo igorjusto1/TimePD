@@ -22,34 +22,12 @@
 	template="/WEB-INF/templates/default.xhtml"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="content">
-		<h1>Welcome to WildFly!</h1>
+		<h1>Bem vindo ao nosso cadastro</h1>
 
 		<div>
-			<p>You have successfully deployed a Java EE 7 Enterprise
-				Application.</p>
-			<h3>Your application can run on:</h3>
-			<img src="resources/gfx/wildfly_400x130.jpg" />
+			<h:graphicImage value="/resources/gfx/wildfly_400x130.jpg" />
 		</div>
 
-		<p:linkButton outcome="#{homeController.pessoaIndex()}"
-			value="Página de pessoas">
-		</p:linkButton>
-
-
-		<p:linkButton outcome="#{homeController.bibliotecaIndex()}"
-			value="Cadastro de livros" icon="pi pi-bookmark">
-		</p:linkButton>		
-
-		<p:linkButton outcome="#{homeController.estadoIndex()}"
-			value="Página de Estados"/>
-			
-		<p:linkButton outcome="#{homeController.cadastroIndex()}"
-			value="Cadastro Geral">
-
-		</p:linkButton>
-		
-		<p:linkButton outcome="#{homeController.cidadeIndex()}"
-			value="Página de Cidades"/>
 
 	</ui:define>
 </ui:composition>

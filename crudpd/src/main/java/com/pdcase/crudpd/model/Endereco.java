@@ -87,14 +87,8 @@ public class Endereco implements Serializable {
 
 
 	public String toString() {
-		return this.cidade + ", " + this.bairro + ", " + this.cep + ", " + this.estado;
+		return this.cidade + ", " + this.bairro + ", " + this.cep + ", " + this.estado.getNomeEstado();
 	}
 
-
-
-	public List<Endereco> getAllEndereco() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
