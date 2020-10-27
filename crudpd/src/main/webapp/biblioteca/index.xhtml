@@ -191,7 +191,7 @@
 					<div class="botoes">
 						<h:form>
 							<p:commandButton action="#{bibliotecaController.edit(livro.id)}"
-								icon="pi pi-user-edit" ajax="false">
+								icon="pi pi-user-edit" ajax="true" oncomplete="$('#movieBtn').click();" update=":newLivro">
 							</p:commandButton>
 						</h:form>
 
