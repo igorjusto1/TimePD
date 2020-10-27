@@ -76,7 +76,7 @@ public class EnderecoRepositorio {
 		}
 	}
 
-	public List<Endereco> getListCadastro() {
+	public List<Endereco> getListEndereco() {
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Endereco> criteria = cb.createQuery(Endereco.class);

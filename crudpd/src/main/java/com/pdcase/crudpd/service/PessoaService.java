@@ -37,7 +37,7 @@ public class PessoaService {
 	
 	public List<EnderecoSelectList> getAllCadastro(){
 
-		return cr.getListCadastro().stream().map(EnderecoSelectList::new).collect(Collectors.toList());
+		return cr.getListEndereco().stream().map(EnderecoSelectList::new).collect(Collectors.toList());
 	}
 	
 	public PessoaViewModel edit(int id) {
