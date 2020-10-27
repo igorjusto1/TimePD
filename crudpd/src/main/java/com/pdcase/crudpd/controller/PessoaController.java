@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
@@ -41,7 +42,8 @@ public class PessoaController implements Serializable {
 	@Inject
 	private PessoaService pessoaService;
 	// Logger pra erros
-	private transient Logger log;
+	@Inject
+	private Logger log;
 
 	// Modelo utilizado durante os requests
 	private PessoaViewModel newPessoa;
@@ -52,8 +54,6 @@ public class PessoaController implements Serializable {
 	// Lista de enderecos para cadastro
 	private List<EnderecoSelectList> enderecos;
 
-	// File para upload csv
-	private UploadedFile fileUpload;
 
 	// file para download de csv
 	private StreamedContent fileDownload;
@@ -77,13 +77,6 @@ public class PessoaController implements Serializable {
 		this.pessoas = pessoas;
 	}
 
-	public UploadedFile getFileUpload() {
-		return fileUpload;
-	}
-
-	public void setFileUpload(UploadedFile fileUpload) {
-		this.fileUpload = fileUpload;
-	}
 
 	public StreamedContent getFileDownload() {
 		return fileDownload;
@@ -136,9 +129,13 @@ public class PessoaController implements Serializable {
 	}
 
 	// Apaga o objeto passado por id no request
-	public void delete(int id) {
+	public void delete() {
 		try {
-			pessoaService.delete(id);
+			
+			pessoaService.delete(newPessoa.getId());
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Apagado!",
+					"Registro de " + newPessoa.getNome() + " apagado com sucesso");
+			facesContext.addMessage(null, m);
 			init();
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
@@ -150,9 +147,9 @@ public class PessoaController implements Serializable {
 	}
 
 	// Carrega o objeto passado por id para edição
-	public void edit(int id) {
+	public void edit() {
 		try {
-			newPessoa = pessoaService.edit(id);
+			newPessoa = pessoaService.edit(newPessoa.getId());
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Edição carregada!",
 					"Dados de " + newPessoa.getNome() + " carregados para edição com sucesso");
 			facesContext.addMessage(null, m);
@@ -165,46 +162,54 @@ public class PessoaController implements Serializable {
 		}
 	}
 
-	public void upload() {
-		if (fileUpload != null) {
+	
+	
+	 public void handleFileUpload(FileUploadEvent event) {
+		 UploadedFile fileUpload = event.getFile();
+	        if (fileUpload != null) {
 
-			byte[] fileContent = fileUpload.getContent();
+				byte[] fileContent = fileUpload.getContent();
 
-			InputStream is = new ByteArrayInputStream(fileContent);
-			BufferedReader bfReader = new BufferedReader(new InputStreamReader(is));
-			String temp = null;
+				InputStream is = new ByteArrayInputStream(fileContent);
+				BufferedReader bfReader = new BufferedReader(new InputStreamReader(is));
+				String temp = null;
 
-			try {
-				int i = 1;
-				while ((temp = bfReader.readLine()) != null) {
-					String[] spli = temp.split(";");
+				try {
+					int i = 1;
+					while ((temp = bfReader.readLine()) != null) {
+						String[] spli = temp.split(";");
 
-					String cpf = spli[2].replace("-", "");
-					cpf = cpf.replace(".", "");
-					newPessoa = new PessoaViewModel();
-					newPessoa.setCpf(cpf);
-					newPessoa.setNome(spli[0]);
-					newPessoa.setSobrenome(spli[1]);
-					newPessoa.setNascimento(convertParaDateTime(i, spli[3]));
-					EnderecoSelectList e = new EnderecoSelectList();
-					e.setId(Integer.parseInt(spli[4]));
-					newPessoa.setEndereco(e);
-					i++;
+						String cpf = spli[2].replace("-", "");
+						cpf = cpf.replace(".", "");
+						newPessoa = new PessoaViewModel();
+						newPessoa.setCpf(cpf);
+						newPessoa.setNome(spli[0]);
+						newPessoa.setSobrenome(spli[1]);
+						newPessoa.setNascimento(convertParaDateTime(i, spli[3]));
+						EnderecoSelectList e = new EnderecoSelectList();
+						e.setId(Integer.parseInt(spli[4]));
+						newPessoa.setEndereco(e);
+						i++;
 
-					pessoaService.register(newPessoa);
+						pessoaService.register(newPessoa);
 
+					}
+					
+					
+					refreshList();
+				} catch (IOException e) {
+					String errorMessage = getRootErrorMessage(e);
+					FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage,
+							"Erro no Upload de arquivo");
+					facesContext.addMessage(null, m);
+					log.info(errorMessage);
 				}
-			} catch (IOException e) {
-				String errorMessage = getRootErrorMessage(e);
-				FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage,
-						"Erro no Upload de arquivo");
-				facesContext.addMessage(null, m);
-				log.info(errorMessage);
+				FacesMessage message = new FacesMessage("Successful", fileUpload.getFileName() + " carregado.");
+				FacesContext.getCurrentInstance().addMessage(null, message);
 			}
-			FacesMessage message = new FacesMessage("Successful", fileUpload.getFileName() + " carregado.");
-			FacesContext.getCurrentInstance().addMessage(null, message);
-		}
-	}
+	    }
+	
+
 
 	public void download() {
 		StringBuilder linhas = new StringBuilder("Id;Nome;Sobrenome;Cpf;Data de Nascimento;\r\n");
