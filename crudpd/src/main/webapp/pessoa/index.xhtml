@@ -49,7 +49,7 @@
 		</script>
 
 		<h1>Tela de Pessoas</h1>
-		<p:growl id="messages" showDetail="true" />
+		<p:growl autoUpdate="true" showDetail="true" />
 		<p:dialog modal="true" widgetVar="statusDialog" header="Carregando"
 			draggable="false" closable="false" resizable="false">
 			<p:graphicImage value="/resources/gfx/ajaxloadingbar.gif" />
@@ -59,16 +59,11 @@
 			minHeight="40">
 
 			<h:form id="pessoaBatch" enctype="multipart/form-data">
-				<h:outputText value="Formato: Nome;Sobrenome;CPF;Data de Nascimento;Id Cidade"></h:outputText>
+				<h:outputText
+					value="Formato: Nome;Sobrenome;CPF;Data de Nascimento;Id Cidade"></h:outputText>
 				<br />
-				<p:fileUpload value="#{pessoaController.fileUpload}" mode="simple"
-					skinSimple="true" />
-				<br />
-				<p:commandButton icon="pi pi-save" update=":tablePessoa" ajax="false"
-					onclick="PF('statusDialog').show();"
-					actionListener="#{pessoaController.upload}"
-					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dlg2').hide(); PF('statusDialog').hide();" />
-
+				<p:fileUpload listener="#{pessoaController.handleFileUpload}"
+					/>
 			</h:form>
 		</p:dialog>
 
@@ -88,8 +83,7 @@
 					</div>
 					<div>
 						<p:inputText id="nome" value="#{pessoaController.newPessoa.nome}"
-							required="true" label="Nome" />
-						<p:message for="nome" />
+							required="true" label="Nome" maxlength="20" />
 					</div>
 
 					<div class="label">
@@ -100,8 +94,7 @@
 					<div>
 						<p:inputText id="sobrenome"
 							value="#{pessoaController.newPessoa.sobrenome}" required="true"
-							label="Sobrenome" />
-						<p:message for="sobrenome" />
+							label="Sobrenome" maxlength="20" />
 					</div>
 
 
@@ -114,7 +107,8 @@
 					<div>
 						<p:selectOneMenu id="e"
 							value="#{pessoaController.newPessoa.endereco}" filter="true"
-							filterMatchMode="contains" converter="enderecoConverter">
+							filterMatchMode="contains" converter="enderecoConverter"
+							required="true" label="Endereço">
 
 							<f:selectItem itemLabel="Selecione um endereço"
 								noSelectionOption="true" />
@@ -122,6 +116,7 @@
 								var="endereco" itemLabel="#{endereco.displayName}"
 								itemValue="#{endereco}" />
 						</p:selectOneMenu>
+
 					</div>
 
 
@@ -133,7 +128,6 @@
 						<p:inputMask id="cpf" converter="cpfConverter"
 							mask="999.999.999-99" value="#{pessoaController.newPessoa.cpf}"
 							required="true" label="Cpf" />
-						<p:message for="cpf" />
 
 					</div>
 
@@ -146,104 +140,78 @@
 						<p:calendar id="nascimento" pattern="dd/MM/yyyy" showOn="button"
 							mask="true" value="#{pessoaController.newPessoa.nascimento}"
 							required="true" label="Nascimento" style="margin-right: 7px;" />
-						<p:message for="nascimento" />
 
 
 					</div>
 					<div class="label"></div>
 					<div>
 						<p:commandButton action="#{pessoaController.register}"
-							update=":tablePessoa" onclick="PF('statusDialog').show();"
-							oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dlg1').hide(); PF('statusDialog').hide();"
-							style="text-align:right;" icon="pi pi-save">
+							style="text-align:right;" onclick="PF('statusDialog').show();"
+							oncomplete="PF('statusDialog').hide()" icon="pi pi-save">
 						</p:commandButton>
 					</div>
 				</div>
 			</h:form>
 		</p:dialog>
+		<ui:debug />
 
+		<h:form id="dataTableForm">
+			<p:dataTable id="tablePessoa" var="pessoa" style="text-align:center;"
+				value="#{pessoaController.pessoas}" rows="10" paginator="true"
+				paginatorPosition="bottom"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} linhas"
+				rowsPerPageTemplate="5,10,15" rowKey="#{pessoa.id}"
+				selection="#{pessoaController.newPessoa}" selectionMode="single">
+				<p:autoUpdate />
+				<f:facet name="header">
+                Lista de Pessoas
+            </f:facet>
+				<p:column>
+					<f:facet name="header">CPF</f:facet>
+					<h:outputText value="#{pessoa.cpf}">
+						<f:converter converterId="cpfConverter" />
+					</h:outputText>
 
+				</p:column>
+				<p:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{pessoa.nome}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">Sobrenome</f:facet>
+					<h:outputText value="#{pessoa.sobrenome}" />
+				</p:column>
 
-		<div style="clear: both;"></div>
-		<p:dataTable id="tablePessoa" var="pessoa" style="text-align:center;"
-			value="#{pessoaController.pessoas}" rows="10" paginator="true"
-			paginatorPosition="bottom"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} linhas"
-			rowsPerPageTemplate="5,10,15">
-			<p:column>
-				<f:facet name="header">CPF</f:facet>
-				<h:outputText value="#{pessoa.cpf}">
-					<f:converter converterId="cpfConverter" />
-				</h:outputText>
+				<p:column>
+					<f:facet name="header">Data de Nascimento</f:facet>
+					<h:outputText value="#{pessoa.nascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Endereço</f:facet>
+					<h:outputText value="#{pessoa.endereco.displayName}" />
+				</p:column>
 
-			</p:column>
-			<p:column>
-				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{pessoa.nome}" />
-			</p:column>
-			<p:column>
-				<f:facet name="header">Sobrenome</f:facet>
-				<h:outputText value="#{pessoa.sobrenome}" />
-			</p:column>
+				<f:facet name="paginatorBottomLeft">
 
-			<p:column>
-				<f:facet name="header">Data de Nascimento</f:facet>
-				<h:outputText value="#{pessoa.nascimento}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
-			</p:column>
-			<p:column>
-				<f:facet name="header">Endereço</f:facet>
-				<h:outputText value="#{pessoa.endereco.displayName}" />
-			</p:column>
-			<p:column>
-				<f:facet name="header">Ações</f:facet>
-				<div style="display: inline-block; margin: auto;">
-					<h:form style="float: left;">
-						<p:commandButton style="float: left;"
-							onclick="PF('statusDialog').show();"
-							oncomplete="PF('dlg1').show();PF('statusDialog').hide()"
-							action="#{pessoaController.edit(pessoa.id)}"
-							icon="pi pi-user-edit" update=":newPessoa">
-							<p:resetInput target="newPessoa" />
-						</p:commandButton>
-					</h:form>
-
-					<h:form style="float: left;">
-
-						<p:commandButton action="#{pessoaController.delete(pessoa.id)}"
-							update=":tablePessoa" icon="pi pi-user-minus"
-							onclick="PF('statusDialog').show();"
-							oncomplete="PF('statusDialog').hide()">
-							<p:resetInput target="newPessoa" />
-						</p:commandButton>
-					</h:form>
-				</div>
-			</p:column>
-			<f:facet name="paginatorBottomLeft">
-
-				<div style="float: left;">
-					<h:form style="float: left;">
+					<div style="float: left;">
 						<p:commandButton action="#{pessoaController.refreshList}"
-							update=":tablePessoa" icon="pi pi-refresh"
-							onclick="PF('statusDialog').show();"
+							icon="pi pi-refresh" onclick="PF('statusDialog').show();"
 							oncomplete="PF('statusDialog').hide()" />
-					</h:form>
-					<h:form style="float: left;">
+
 						<p:commandButton ajax="false"
 							actionListener="#{pessoaController.download}"
 							icon="pi pi-arrow-down"
 							onclick="PrimeFaces.monitorDownload(start, stop);">
 							<p:fileDownload value="#{pessoaController.fileDownload}" />
 						</p:commandButton>
-					</h:form>
-				</div>
-			</f:facet>
-			<f:facet name="paginatorBottomRight">
+					</div>
+				</f:facet>
+				<f:facet name="paginatorBottomRight">
 
-				<div style="float: left;">
-					<h:form style="float:left;">
+					<div style="float: left;">
 
 						<p:commandButton icon="pi pi-plus" update=":newPessoa"
 							action="#{pessoaController.cleanPessoa}"
@@ -251,15 +219,23 @@
 							oncomplete="PF('dlg1').show();PF('statusDialog').hide();">
 							<p:resetInput target="newPessoa" />
 						</p:commandButton>
-					</h:form>
 
-					<p:commandButton icon="pi pi-file-o" onclick="PF('dlg2').show();" />
+						<p:commandButton icon="pi pi-file-o" onclick="PF('dlg2').show();" />
 
-				</div>
-			</f:facet>
-		</p:dataTable>
-
-
+					</div>
+				</f:facet>
+			</p:dataTable>
+			<p:contextMenu for="tablePessoa">
+				<p:menuitem value="Edit" icon="pi pi-search"
+					onclick="PF('statusDialog').show();"
+					oncomplete="PF('dlg1').show();PF('statusDialog').hide()"
+					action="#{pessoaController.edit}" update="newPessoa" />
+				<p:menuitem value="Delete" icon="pi pi-times"
+					onclick="PF('statusDialog').show();"
+					oncomplete="PF('statusDialog').hide();"
+					action="#{pessoaController.delete}" />
+			</p:contextMenu>
+		</h:form>
 
 	</ui:define>
 </ui:composition>
