@@ -50,7 +50,7 @@ public class CidadeRepositorio {
 	public void saveOrUpdate(Cidade c) {
 		try {
 			ut.begin();
-		} catch (Exception ex) {
+		} catch (Exception e) {
 			throw new EJBException();
 		}
 
@@ -64,7 +64,7 @@ public class CidadeRepositorio {
 
 		try {
 			ut.commit();
-		} catch (Exception ex) {
+		} catch (Exception e) {
 			try {
 				this.ut.rollback();
 			} catch (Exception e1) {
@@ -76,9 +76,9 @@ public class CidadeRepositorio {
 	public List<Cidade> getListCidades() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Cidade> criteria = cb.createQuery(Cidade.class);
-		Root<Cidade> e = criteria.from(Cidade.class);
-		criteria.select(e).orderBy(cb.asc(e.get("nomeCidade")));
-
+		Root<Cidade> c = criteria.from(Cidade.class);
+		criteria.select(c).orderBy(cb.asc(c.get("nomeCidade")));
+		
 		return em.createQuery(criteria).getResultList();
 	}
 

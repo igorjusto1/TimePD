@@ -1,55 +1,83 @@
 package com.pdcase.crudpd.viewmodel;
 
+import java.io.Serializable;
+
 import com.pdcase.crudpd.model.Cidade;
+import com.pdcase.crudpd.model.Estado;
 
-public class CidadeViewModel {
+public class CidadeViewModel implements Serializable {
 
-	private int idCidade;
-	private String nome;
-	private int idEstado;
+	private static final long serialVersionUID = 1L;
+
+	private int id;
+	private String nomeCidade;
+	private String nomeEstado;
+	private String siglaEstado;
+	private Estado estado;
+	private EstadoSelectList listaEstados;
 
 	public CidadeViewModel() {
-
+		// Construtor standard
+		// Vai inicializar o Estado
+		this.estado = new Estado();
 	}
 
 	public CidadeViewModel(Cidade c) {
-		this.idCidade = c.getIdCidade();
-		this.nome = c.getNomeCidade();
-		this.idEstado = c.getIdEstado();
+		this.id = c.getIdCidade();
+		this.nomeCidade = c.getNomeCidade();
+		this.estado = c.getEstado();
 	}
 
-	public int getIdCidade() {
-		return idCidade;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdCidade(int idCidade) {
-		this.idCidade = idCidade;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeCidade() {
+		return nomeCidade;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeCidade(String nome) {
+		this.nomeCidade = nome;
 	}
 
-	public int getIdEstado() {
-		return idEstado;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+	
+	public String getNomeEstado() {
+		return this.estado.getNomeEstado();
 	}
 
+	public EstadoSelectList getListaEstado() {
+		return listaEstados;
+	}
+	
 	public Cidade toCidade() {
 		Cidade c = new Cidade();
-
-		c.setIdCidade(this.idCidade);
-		c.setIdEstado(this.idEstado);
-		c.setNomeCidade(this.nome);
-
+		
+		c.setIdCidade(id);
+		c.setNomeCidade(nomeCidade);
+		c.setEstado(estado);
+		
 		return c;
+	}
+
+	public Estado toEstado() {
+		Estado e = new Estado();
+
+		e.setIdEstado(id);
+		e.setNomeEstado(nomeEstado);
+		e.setSiglaEstado(siglaEstado);
+
+		return e;
 	}
 
 }

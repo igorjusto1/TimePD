@@ -21,7 +21,8 @@ public class EstadoController implements Serializable {
 	@Inject
 	private EstadoService estadoService;
 
-	private transient Logger log;
+	@Inject
+	private Logger log;
 
 	@Inject
 	private Estado newEstado;
@@ -32,6 +33,10 @@ public class EstadoController implements Serializable {
 
 	public void setNewEstado(Estado newEstado) {
 		this.newEstado = newEstado;
+	}
+	
+	public String getNomeEstado() {
+		return this.newEstado.getNomeEstado();
 	}
 
 	@PostConstruct

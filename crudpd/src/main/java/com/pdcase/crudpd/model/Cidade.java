@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,8 +30,9 @@ public class Cidade implements Serializable {
 	@Column(name = "id_cidade", nullable = false) // PK
 	private int idCidade;
 
-	@Column(name = "id_estado", nullable = false) // FK -> estado_teste.id_estado
-	private int idEstado;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_estado") // FK -> estado_teste.id_estado
+	private Estado estado;
 
 	@Column(name = "nome_cidade", nullable = false)
 	private String nomeCidade;
@@ -37,24 +41,24 @@ public class Cidade implements Serializable {
 		return idCidade;
 	}
 
-	public void setIdCidade(int idCidade) {
-		this.idCidade = idCidade;
+	public void setIdCidade(int id) {
+		this.idCidade = id;
 	}
 
-	public int getIdEstado() {
-		return idEstado;
+	public Estado getEstado() {
+		return estado;
 	}
 
-	public void setIdEstado(int idEstado) {
-		this.idEstado = idEstado;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public String getNomeCidade() {
 		return nomeCidade;
 	}
 
-	public void setNomeCidade(String nomeCidade) {
-		this.nomeCidade = nomeCidade;
+	public void setNomeCidade(String nome) {
+		this.nomeCidade = nome;
 	}
 
 }

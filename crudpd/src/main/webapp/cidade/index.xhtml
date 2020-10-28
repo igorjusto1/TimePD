@@ -35,18 +35,32 @@
 			<h3>Adicionar nova cidade</h3>
 
 			<h:form id="newCidade">
-				<h:inputHidden value="#{cidadeController.newCidade.idCidade}"></h:inputHidden>
+				<h:inputHidden value="#{cidadeController.newCidade.id}" />
 				<div>
 					<label>Nome da Cidade</label>
 					<p:inputText id="nome"
 						value="#{cidadeController.newCidade.nomeCidade}" required="true"
-						maxlength="20" />
+						maxlength="50" />
+				</div>
+				<!-- Input text -->
+				<div>
+					<label>ID do Estado</label>
+					<p:inputText id="idEstado"
+						value="#{cidadeController.newCidade.estado.idEstado}"
+						required="true" maxlength="2" />
 				</div>
 				<!-- Aqui vem o drop down dos Estados já cadastrados -->
 				<div>
 					<label>Estado</label>
-					<p:selectOneMenu id="console" value="#{selectOneMenuView.console}">
-						<f:selectItem itemLabel="Aqui vem os Estados"/>
+					<p:selectOneMenu id="estado"
+						value="#{cidadeController.newCidade.estado.idEstado}"
+						filter="false">
+						<f:selectItem itemLabel="Selecione uma UF"
+							noSelectionOption="true" />
+						<f:selectItems
+							value="#{cidadeController.newCidade.estado.idEstado}" var="estado"
+							itemLabel="#{cidadeController.estados}"
+							itemValue="#{cidadeController.newCidade.estado.idEstado}" required="true"/>
 					</p:selectOneMenu>
 				</div>
 				<p:commandButton action="#{cidadeController.register}"
@@ -56,7 +70,7 @@
 
 		<fieldset>
 			<h3>Listagem de Cidades</h3>
-			<h:dataTable var="estado" value="#{cidadeController.getAllCidades()}"
+			<h:dataTable var="cidade" value="#{cidadeController.cidades}"
 				styleClass="simpletablestyle" id="tabela">
 				<p:column>
 					<f:facet name="header">Nome da Cidade</f:facet>
@@ -65,22 +79,20 @@
 
 				<p:column>
 					<f:facet name="header">Estado</f:facet>
-					<h:outputText value="#{estado.nomeEstado}" />
+					<h:outputText value="#{cidade.estado.siglaEstado}" />
 				</p:column>
 
 				<p:column>
 					<f:facet name="header">Ações</f:facet>
 
 					<h:form style="float: left;">
-						<p:commandButton
-							action="#{estadoController.edit(estado.idEstado)}"
+						<p:commandButton action="#{cidadeController.edit(cidade.id)}"
 							icon="pi pi-refresh" ajax="false" text="Editar">
 						</p:commandButton>
 					</h:form>
 
 					<h:form style="float: left;">
-						<p:commandButton
-							action="#{estadoController.delete(estado.idEstado)}"
+						<p:commandButton action="#{cidadeController.delete(cidade.id)}"
 							icon="pi pi-minus-circle" ajax="false">
 						</p:commandButton>
 					</h:form>
