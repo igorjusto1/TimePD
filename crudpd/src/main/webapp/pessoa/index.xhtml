@@ -59,12 +59,12 @@
 			minHeight="40">
 
 			<h:form id="pessoaBatch" enctype="multipart/form-data">
-				<h:outputText value="Formato: Nome;Sobrenome;CPF;Data de Nascimento;Id Cidade"></h:outputText>
+				<h:outputText value="Formato: Nome;Sobrenome;CPF;Data de Nascimento"></h:outputText>
 				<br />
 				<p:fileUpload value="#{pessoaController.fileUpload}" mode="simple"
 					skinSimple="true" />
 				<br />
-				<p:commandButton icon="pi pi-save" update=":tablePessoa" ajax="false"
+				<p:commandButton icon="pi pi-save" update=":tablePessoa"
 					onclick="PF('statusDialog').show();"
 					actionListener="#{pessoaController.upload}"
 					oncomplete="if (args &amp;&amp; !args.validationFailed) PF('dlg2').hide(); PF('statusDialog').hide();" />

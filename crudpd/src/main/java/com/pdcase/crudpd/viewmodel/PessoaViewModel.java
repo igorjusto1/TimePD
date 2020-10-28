@@ -1,13 +1,10 @@
 package com.pdcase.crudpd.viewmodel;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.pdcase.crudpd.model.Pessoa;
 
-public class PessoaViewModel implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class PessoaViewModel {
 
 	public PessoaViewModel() {
 		// Construtor padrão
@@ -19,7 +16,7 @@ public class PessoaViewModel implements Serializable {
 		this.sobrenome = p.getSobrenome();
 		this.cpf = p.getCpf();
 		this.nascimento = p.getNascimento();
-		this.endereco = new EnderecoSelectList(p.getEndereco());
+		this.endereco = new CadastroSelectList(p.getEndereco());
 
 	}
 
@@ -33,7 +30,7 @@ public class PessoaViewModel implements Serializable {
 
 	private Date nascimento;
 
-	private EnderecoSelectList endereco;
+	private CadastroSelectList endereco;
 
 	public int getId() {
 		return id;
@@ -75,11 +72,11 @@ public class PessoaViewModel implements Serializable {
 		this.nascimento = nascimento;
 	}
 
-	public EnderecoSelectList getEndereco() {
+	public CadastroSelectList getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(EnderecoSelectList endereco) {
+	public void setEndereco(CadastroSelectList endereco) {
 		this.endereco = endereco;
 	}
 

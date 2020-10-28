@@ -7,7 +7,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import com.pdcase.crudpd.viewmodel.EnderecoSelectList;
+import com.pdcase.crudpd.viewmodel.CadastroSelectList;
 
 @FacesConverter("enderecoConverter")
 public class EnderecoConverter implements Converter {
@@ -18,7 +18,7 @@ public class EnderecoConverter implements Converter {
 		}
 
 		try {
-			return new EnderecoSelectList(Integer.parseInt(endereco));
+			return new CadastroSelectList(Integer.parseInt(endereco));
 		} catch (NumberFormatException e) {
 			throw new ConverterException(new FacesMessage(String.format("%s não é um ID de Endereço válido", endereco)),
 					e);
@@ -31,8 +31,8 @@ public class EnderecoConverter implements Converter {
 			return "";
 		}
 
-		if (modelValue instanceof EnderecoSelectList) {
-			return String.valueOf(((EnderecoSelectList) modelValue).getId());
+		if (modelValue instanceof CadastroSelectList) {
+			return String.valueOf(((CadastroSelectList) modelValue).getId());
 		} else {
 			throw new ConverterException(new FacesMessage(modelValue + " não é um endereço"));
 		}
