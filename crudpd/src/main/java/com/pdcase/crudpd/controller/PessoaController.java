@@ -30,7 +30,7 @@ import com.pdcase.crudpd.model.Pessoa;
 import com.pdcase.crudpd.service.EnderecoService;
 import com.pdcase.crudpd.service.PessoaService;
 import com.pdcase.crudpd.util.CpfConverter;
-import com.pdcase.crudpd.viewmodel.CadastroSelectList;
+import com.pdcase.crudpd.viewmodel.EnderecoSelectList;
 import com.pdcase.crudpd.viewmodel.PessoaViewModel;
 
 // Named serve pra fazer com que seja um bean gerenciado. Nome padrão é pessoaController pra acesso nas views
@@ -58,7 +58,7 @@ public class PessoaController implements Serializable {
 	private List<PessoaViewModel> pessoas;
 
 	// Lista de enderecos para cadastro
-	private List<CadastroSelectList> enderecos;
+	private List<EnderecoSelectList> enderecos;
 
 	// file para download de csv
 	private StreamedContent fileDownload;
@@ -90,11 +90,11 @@ public class PessoaController implements Serializable {
 		this.fileDownload = fileDownload;
 	}
 
-	public List<CadastroSelectList> getEnderecos() {
+	public List<EnderecoSelectList> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(List<CadastroSelectList> enderecos) {
+	public void setEnderecos(List<EnderecoSelectList> enderecos) {
 		this.enderecos = enderecos;
 	}
 
