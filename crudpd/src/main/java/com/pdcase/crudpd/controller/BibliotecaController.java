@@ -33,7 +33,8 @@ public class BibliotecaController implements Serializable{
 	
 	
 	//Logger pra erros
-	private transient Logger log;
+	@Inject
+	private Logger log;
 
 	// Modelo utilizado durante os requests
 	@Inject
@@ -82,15 +83,6 @@ public class BibliotecaController implements Serializable{
 
 	// Salva o objeto salvo no request
 	
-//	public void register() {
-//		try {
-//			bibliotecaService.register(newLivro);
-//			initNewLivro();
-//		} catch (Exception e) {
-//			log.info(e.getMessage());
-//		}
-//	}
-	
 	public void register() {
 		try {
 			
@@ -111,15 +103,6 @@ public class BibliotecaController implements Serializable{
 
 	// Apaga o objeto passado por id no request
 	
-//	public void delete(int id) {
-//		try {
-//			bibliotecaService.delete(id);
-//			initNewLivro();
-//		} catch (Exception e) {
-//			log.info(e.getMessage());
-//		}
-//	}
-
 	public void delete(int id) {
 		try {
 			bibliotecaService.delete(id);

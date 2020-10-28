@@ -41,10 +41,16 @@
 		<h1 style="font-weight: bold">Cadastros de livros!</h1>
 
 		<fieldset style="font-weight: bold">
-			<h3>Adicionar novo livro</h3>
+		<div class="cadastro" >
 			<h:graphicImage value="/resources/gfx/livro.jpg" />
 
 			<p:growl id="messages" showDetail="true" />
+			
+			<div class="camposcadastro" >
+			
+			<p:commandButton id="movieBtn" value="Cadastrar novo livro" icon="pi pi-plus-circle" type="button" />
+			
+    <p:overlayPanel id="moviePanel" for="movieBtn" hideEffect="fade"  style="width:650px" modal="true">
 
 			<h:form id="newLivro" enctype="multipart/form-data">
 				<p:messages>
@@ -67,13 +73,14 @@
 					</div>
 
 					<div class="texto">
-						<h:outputLabel for="nome_autor" value="Nome do autor:"
+						<h:outputLabel id="nome_autor" for="nome_autor" value="Nome do autor:"
 							style="font-weight:bold" />
+							<p:message for="autor" />
 					</div>
 
 					<div>
 						<p:selectOneMenu id="autor"
-							value="#{bibliotecaController.newLivro.autor.id}" filter="true">
+							value="#{bibliotecaController.newLivro.autor.id}" filter="true" required="true">
 							<f:selectItem itemLabel="Selecione um autor"
 								noSelectionOption="true" />
 							<f:selectItems value="#{bibliotecaController.autor}" var="autor"
@@ -81,7 +88,7 @@
 						</p:selectOneMenu>
 						<p:message for="autor" />
 					</div>
-
+					
 					<div class="texto">
 						<h:outputLabel for="editora" value="Editora:"
 							style="font-weight:bold" />
@@ -143,6 +150,9 @@
 
 				</div>
 			</h:form>
+			 </p:overlayPanel>
+			 </div>
+			 </div>
 		</fieldset>
 
 		<fieldset style="font-weight: bold">
@@ -181,7 +191,7 @@
 					<div class="botoes">
 						<h:form>
 							<p:commandButton action="#{bibliotecaController.edit(livro.id)}"
-								icon="pi pi-user-edit" ajax="false">
+								icon="pi pi-user-edit" ajax="true" oncomplete="$('#movieBtn').click();" update=":newLivro">
 							</p:commandButton>
 						</h:form>
 

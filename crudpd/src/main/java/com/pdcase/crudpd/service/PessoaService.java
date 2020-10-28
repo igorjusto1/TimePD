@@ -21,25 +21,25 @@ public class PessoaService {
 	@Inject
 	private EnderecoRepositorio cr;
 
-
 	public void register(PessoaViewModel pessoa) {
 		log.info("Registering " + pessoa.getNome());
 		pr.saveOrUpdate(pessoa.toPessoa());
 	}
-	
-	public List<Pessoa> getAllPessoas(){
+
+	public List<Pessoa> getAllPessoas() {
 		return pr.getListPessoas();
 	}
 
-	public List<PessoaViewModel> getAllPessoasViewModel(){
+	public List<PessoaViewModel> getAllPessoasViewModel() {
 		return pr.getListPessoas().stream().map(PessoaViewModel::new).collect(Collectors.toList());
 	}
-	
-	public List<CadastroSelectList> getAllCadastro(){
 
-		return cr.getListCadastro().stream().map(CadastroSelectList::new).collect(Collectors.toList());
+	public List<CadastroSelectList> getAllCadastro() {
+
+		return cr.getListEndereco().stream().map(EnderecoSelectList::new).collect(Collectors.toList());
+
 	}
-	
+
 	public PessoaViewModel edit(int id) {
 		return new PessoaViewModel(pr.findById(id));
 	}
@@ -50,7 +50,6 @@ public class PessoaService {
 		log.info("Apagando " + pessoa.getNome());
 
 		pr.deleteById(id);
-
 
 	}
 }
