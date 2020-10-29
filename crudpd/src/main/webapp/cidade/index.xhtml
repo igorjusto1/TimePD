@@ -42,27 +42,21 @@
 						value="#{cidadeController.newCidade.nomeCidade}" required="true"
 						maxlength="50" />
 				</div>
-				<!-- Input text -->
-				<div>
-					<label>ID do Estado</label>
-					<p:inputText id="idEstado"
-						value="#{cidadeController.newCidade.estado.idEstado}"
-						required="true" maxlength="2" />
-				</div>
+
 				<!-- Aqui vem o drop down dos Estados já cadastrados -->
 				<div>
 					<label>Estado</label>
 					<p:selectOneMenu id="estado"
 						value="#{cidadeController.newCidade.estado.idEstado}"
 						filter="false">
-						<f:selectItem itemLabel="Selecione uma UF"
-							noSelectionOption="true" />
 						<f:selectItems
-							value="#{cidadeController.newCidade.estado.idEstado}" var="estado"
-							itemLabel="#{cidadeController.estados}"
-							itemValue="#{cidadeController.newCidade.estado.idEstado}" required="true"/>
+							value="#{cidadeController.estados}"
+							var="estado" itemLabel="#{estado.displayName}"
+							itemValue="#{estado.id}"
+							required="true" />
 					</p:selectOneMenu>
 				</div>
+
 				<p:commandButton action="#{cidadeController.register}"
 					icon="pi pi-save" ajax="false"></p:commandButton>
 			</h:form>

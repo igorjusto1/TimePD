@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.pdcase.crudpd.model.Estado;
 import com.pdcase.crudpd.service.CidadeService;
 import com.pdcase.crudpd.viewmodel.CidadeViewModel;
 import com.pdcase.crudpd.viewmodel.EstadoSelectList;

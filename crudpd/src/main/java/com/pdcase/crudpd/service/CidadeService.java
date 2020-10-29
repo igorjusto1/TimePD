@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import com.pdcase.crudpd.data.CidadeRepositorio;
 import com.pdcase.crudpd.data.EstadoRepositorio;
 import com.pdcase.crudpd.model.Cidade;
+import com.pdcase.crudpd.model.Estado;
 import com.pdcase.crudpd.viewmodel.CidadeViewModel;
 import com.pdcase.crudpd.viewmodel.EstadoSelectList;
 
