@@ -55,9 +55,23 @@
 				
 				<div>
 					<label>CEP:</label>
-					<h:inputText id="cep"
+					<h:inputText class="ui-float-label" id="cep"
 						value="#{enderecoController.newEndereco.cep}">
 					</h:inputText>
+				</div>
+				
+				<div>
+					<label>ESTADO:</label>
+					<p:selectOneMenu id="estado"
+						value="#{enderecoController.newEndereco.estado.idEstado}"
+						filter="false">
+
+						<f:selectItems
+							value="#{enderecoController.newEndereco.estado.idEstado}"
+							var="estado" itemLabel="#{estado.displayName}"
+							itemValue="#{estado.id}"
+							required="true" /> 						
+					</p:selectOneMenu>
 				</div>
 				
 				<h:commandButton action="#{enderecoController.register}"
@@ -87,7 +101,10 @@
 					<h:outputText value="#{endereco.cep}" />
 				</h:column>
 				
-
+				<h:column>
+					<f:facet name="header">ESTADO</f:facet>
+					<h:outputText value="#{endereco.estado}" />
+				</h:column>
 				 
 				<h:column>
 					<f:facet name="header">Ações</f:facet>
